@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@gel/generate':
+        specifier: ^0.6.4
+        version: 0.6.4(gel@2.1.1)
       '@playwright/test':
         specifier: ^1.49.1
         version: 1.54.1
@@ -284,11 +287,21 @@ packages:
     resolution: {integrity: sha512-4Et4AN6wmqeA0PfU5Clkv/IS27wiefsWf6TemAZrb75uzkClYEFavim7SboeKwbll9Nbsn2Iv0LT/HS5H7orZg==}
     hasBin: true
 
+  '@gel/generate@0.6.4':
+    resolution: {integrity: sha512-/grKSQTurYNVs0Q1+lIza5HbuG4MuH60LEzxSNodWMWybYUD+7lAl6sJBInfx/Nm7kVqPXnaU9jPKMisp5Vz+Q==}
+    engines: {node: '>= 18.0.0'}
+    hasBin: true
+    peerDependencies:
+      gel: ^2.0.1
+
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
 
   '@hapi/topo@5.1.0':
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
+
+  '@iarna/toml@2.2.5':
+    resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -1657,6 +1670,14 @@ snapshots:
       - typescript
     optional: true
 
+  '@gel/generate@0.6.4(gel@2.1.1)':
+    dependencies:
+      '@iarna/toml': 2.2.5
+      debug: 4.4.1
+      gel: 2.1.1
+    transitivePeerDependencies:
+      - supports-color
+
   '@hapi/hoek@9.3.0':
     optional: true
 
@@ -1664,6 +1685,8 @@ snapshots:
     dependencies:
       '@hapi/hoek': 9.3.0
     optional: true
+
+  '@iarna/toml@2.2.5': {}
 
   '@iconify/types@2.0.0': {}
 

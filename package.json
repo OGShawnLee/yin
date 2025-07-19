@@ -14,9 +14,12 @@
 		"lint": "prettier --check .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
-		"test:e2e": "playwright test"
+		"test:e2e": "playwright test",
+		"migrate": "gel migration create && gel migration apply",
+		"generate": "npx @gel/generate edgeql-js --output-dir src/lib/db/edgeql-js"
 	},
 	"devDependencies": {
+		"@gel/generate": "^0.6.4",
 		"@playwright/test": "^1.49.1",
 		"@sveltejs/adapter-auto": "^6.0.0",
 		"@sveltejs/kit": "^2.22.0",
