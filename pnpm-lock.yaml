@@ -44,6 +44,9 @@ importers:
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
+      phosphor-svelte:
+        specifier: ^3.0.1
+        version: 3.0.1(svelte@5.36.8)(vite@7.0.5(@types/node@24.0.14)(jiti@2.4.2))
       playwright:
         specifier: ^1.53.0
         version: 1.54.1
@@ -1141,6 +1144,15 @@ packages:
 
   perfect-debounce@1.0.0:
     resolution: {integrity: sha512-xCy9V055GLEqoFaHoC1SoLIaLmWctgCUaBaWxDZ7/Zx4CTyX7cJQLJOok/orfjZAh9kEYpjJa4d0KcJmCbctZA==}
+
+  phosphor-svelte@3.0.1:
+    resolution: {integrity: sha512-QuxdzWCBjNZXglk4XpmaKb+JRA6XgKOYWpBY8k82NZwxO5ec7u2iFuueAijKYgj/7hLWHtreAPc2Q5uZFNTRSQ==}
+    peerDependencies:
+      svelte: ^5.0.0 || ^5.0.0-next.96
+      vite: '>=5'
+    peerDependenciesMeta:
+      vite:
+        optional: true
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -2603,6 +2615,14 @@ snapshots:
   pathval@2.0.1: {}
 
   perfect-debounce@1.0.0: {}
+
+  phosphor-svelte@3.0.1(svelte@5.36.8)(vite@7.0.5(@types/node@24.0.14)(jiti@2.4.2)):
+    dependencies:
+      estree-walker: 3.0.3
+      magic-string: 0.30.17
+      svelte: 5.36.8
+    optionalDependencies:
+      vite: 7.0.5(@types/node@24.0.14)(jiti@2.4.2)
 
   picocolors@1.1.1: {}
 
