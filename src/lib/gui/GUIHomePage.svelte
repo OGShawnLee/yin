@@ -20,7 +20,7 @@
 				<div class="grid gap-2 p-4 border-b border-neutral-900">
 					<div>
 						<p class="text-lg text-white font-medium">{post.author.name}</p>
-						<p class="text-sm text-neutral-400">@{post.author.displayName}</p>
+						<a class="text-sm text-neutral-400" href="/{post.author.displayName}">@{post.author.displayName}</a>
 					</div>
 					<p class="leading-relaxed">{post.content}</p>
 					{#if post.createdAt}

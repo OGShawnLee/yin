@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CurrentUserShape } from '@business/schema/AuthSchema';
-	import { Bookmark, House, Pen } from 'phosphor-svelte';
+	import { Bookmark, House, Pen, User } from 'phosphor-svelte';
 	import { enhance } from '$app/forms';
 	import { SignOut } from 'phosphor-svelte';
 	import { fade } from 'svelte/transition';
@@ -24,6 +24,10 @@
 				Home
 			</a>
 			{#if currentUser}
+				<a class="font-medium hover:text-white flex items-center gap-2" href="/{currentUser.displayName}">
+					<User size={24} />
+					Profile
+				</a>
 				<a class="font-medium hover:text-white flex items-center gap-2" href="/bookmarks">
 					<Bookmark size={24} />
 					Bookmarks
@@ -45,7 +49,7 @@
 					</div>
 					<div>
 						<p class="text-lg text-white font-medium">{currentUser.name}</p>
-						<p class="text-white">@{currentUser.displayName}</p>
+						<p class="text-neutral-400">@{currentUser.displayName}</p>
 					</div>
 				</div>
 				<form action="/auth/sign-out" method="post" use:enhance>

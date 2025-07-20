@@ -23,7 +23,20 @@ export default class PostDAO {
         content: true,
         author: { id: true, name: true, displayName: true },
         createdAt: true,
-        order_by: post.createdAt
+        order_by: { expression: post.createdAt, direction: e.DESC },
+      })).run(DBClient);
+    })
+  }
+
+  public static async getAllByAuthor(displayName: string) {
+    return ErrorHandler.useAwait(() => {
+      return e.select(e.Post, (post) => ({
+        id: true,
+        content: true,
+        author: { id: true, name: true, displayName: true },
+        createdAt: true,
+        order_by: { expression: post.createdAt, direction: e.DESC },
+        filter: e.op(post.author.displayName, '=', displayName)
       })).run(DBClient);
     })
   }

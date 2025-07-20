@@ -11,7 +11,8 @@ export default defineConfig({
     button: 'w-full px-4 h-12 flex items-center justify-center text-white font-medium',
     'button--main': 'border border-teal-400 hover:bg-teal-950',
     'button-square': 'size-12 flex items-center justify-center text-white font-medium',
-    'heading-1': "text-3xl font-bold text-white tracking-tight"
+    'heading-1': "text-3xl font-bold text-white tracking-tight",
+    "heading-2": "text-2xl font-bold text-white tracking-tight",
   },
   transformers: [transformerDirectives({ applyVariable: '--uno' }), transformerVariantGroup()],
   presets: [
