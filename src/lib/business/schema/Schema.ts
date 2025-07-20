@@ -1,0 +1,15 @@
+import { date, maxLength, minLength, nullish, pipe, string, transform, trim, union, uuid } from "valibot";
+
+export default class Schema {
+  public static ID_SCHEMA = pipe(
+    string("ID must be a string."),
+    uuid("ID must be a valid UUID."),
+  );
+  public static CREATED_AT_SCHEMA = nullish(
+    pipe(
+      union([string(), date()], 'Created At must be a string or a date.'),
+      transform((value) => (typeof value === 'string' ? new Date(value) : value)),
+      date('Created At must be a valid date.')
+    )
+  );
+}

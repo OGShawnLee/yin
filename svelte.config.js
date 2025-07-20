@@ -12,8 +12,11 @@ const config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
 		alias: {
-			"@auth/*": "src/lib/features/auth/*",
-			"@account/*": "src/lib/features/account/*"
+			"@common/*": "src/lib/common/*",
+			"@db/*": "src/lib/db/*",
+			"@db:qb": "src/lib/db/edgeql-js",
+			"@business/*": "src/lib/business/*",
+			"@gui/*": "src/lib/gui/*",
 		}
 	}
 };

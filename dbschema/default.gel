@@ -1,0 +1,50 @@
+module default {
+  abstract type Record {
+    required createdAt: datetime {
+      readonly := true;
+      rewrite insert using(datetime_of_statement());
+      default := datetime_of_statement();
+    }
+  }
+
+  type Account extending Record {
+    required email: str {
+      constraint exclusive;
+      constraint min_len_value(3);
+      constraint max_len_value(128);
+    }
+    required password: str {
+      constraint min_len_value(8);
+      constraint max_len_value(64);
+    }
+    required refreshTokenVersion: int32 {
+      constraint min_value(0);
+      rewrite insert using(0);
+      default := 0;
+    }
+  }
+
+  type User extending Record {
+    required account: Account {
+      on source delete delete target;
+      constraint exclusive;
+    }
+    required displayName: str {
+      constraint exclusive;
+      constraint min_len_value(3);
+      constraint max_len_value(16);
+    }
+    required name: str {
+      constraint exclusive;
+      constraint min_len_value(3);
+      constraint max_len_value(64);
+    }
+    description: str {
+      constraint max_len_value(256);
+    }
+    location: str {
+      constraint min_len_value(2);
+      constraint max_len_value(64);
+    }
+  }
+}
