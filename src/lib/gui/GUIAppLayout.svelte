@@ -49,8 +49,8 @@
 					</div>
 				</div>
 				<form action="/auth/sign-out" method="post" use:enhance>
-					<button class="button flex gap-2" aria-label="Cerrar Sesión">
-						Cerrar Sesión <SignOut size={24} />
+					<button class="button flex gap-2" aria-label="Sign Out">
+						Sign Out <SignOut size={24} />
 					</button>
 				</form>
 			{:else}
