@@ -1,6 +1,6 @@
 import Schema from "$lib/business/schema/Schema";
 import type { InferOutput } from "valibot";
-import { description, email, integer, maxLength, minLength, nullish, object, parse, pipe, regex, string, trim, uuid } from "valibot";
+import { maxLength, minLength, nullish, object, parse, pipe, regex, string, trim } from "valibot";
 
 export type UserShape = InferOutput<typeof UserSchema.USER_SCHEMA>
 
