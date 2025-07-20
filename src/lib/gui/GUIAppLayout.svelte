@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CurrentUserShape } from '@business/schema/AuthSchema';
-	import { House, Bookmark } from 'phosphor-svelte';
+	import { Bookmark, House, Pen } from 'phosphor-svelte';
 	import { enhance } from '$app/forms';
 	import { SignOut } from 'phosphor-svelte';
 	import { fade } from 'svelte/transition';
@@ -28,9 +28,12 @@
 					<Bookmark size={24} />
 					Bookmarks
 				</a>
+				<a class="font-medium hover:text-white flex items-center gap-2" href="/post/compose">
+					<Pen size={24} />
+					Create Post
+				</a>
 			{/if}
 		</div>
-
 		<section class="grid gap-4">
 			{#if currentUser}
 				<h2 class="hidden">User Status</h2>

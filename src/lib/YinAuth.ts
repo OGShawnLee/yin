@@ -132,6 +132,16 @@ export class YinAuthClient<Payload extends JWTPayload, CurrentUser> {
     });
   }
 
+  public async getAuthPayloadFromCookies(cookies: Cookies): Promise<Payload> {
+    const payload = await this.findAuthPayloadFromCookies(cookies);
+
+    if (payload) {
+      return payload;
+    }
+
+    throw redirect(302, this.CONFIGURATION.SIGN_IN_ROUTE);
+  }
+
   public async getCurrentUserFromDB(cookies: Cookies): Promise<CurrentUser> {
     const user = await this.findCurrentUserFromDB(cookies);
 
