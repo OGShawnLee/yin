@@ -15,4 +15,16 @@ export default class PostDAO {
       }).run(DBClient);
     })
   }
+
+  public static async getAll() {
+    return ErrorHandler.useAwait(() => {
+      return e.select(e.Post, (post) => ({
+        id: true,
+        content: true,
+        author: { id: true, name: true, displayName: true },
+        createdAt: true,
+        order_by: post.createdAt
+      })).run(DBClient);
+    })
+  }
 }
