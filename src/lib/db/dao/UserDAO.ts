@@ -5,6 +5,7 @@ import ErrorHandler from "@common/ErrorHandler";
 import NotFoundError from "@db/NotFoundError";
 import DBClient from "@db/DBClient";
 import e from "@db:qb";
+import type { UpdateUserShape } from "@business/schema/UserSchema";
 
 export class UserDAO {
   public static createOne(credentials: SignUpShape) {
@@ -36,5 +37,14 @@ export class UserDAO {
 
       throw new NotFoundError("Unable to find user. The user doesn't exist.");
     })
+  }
+
+  public static updateOne(displayName: string, data: UpdateUserShape) {
+    return ErrorHandler.useAwait(() => {
+      return e.update(e.User, () => ({
+        set: data,
+        filter_single: { displayName }
+      })).run(DBClient);
+    });
   }
 }

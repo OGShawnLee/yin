@@ -15,7 +15,7 @@ const AuthClient = new YinAuthClient<CurrentUserShape, CurrentUserShape>(
     REFRESH_TOKEN_NAME: REFRESH_TOKEN_NAME,
     SIGN_IN_ROUTE: "/auth/sign-in",
     SIGN_UP_ROUTE: "/auth/sign-up",
-    PROTECTED_ROUTES: ["/bookmarks", "/post/compose"]
+    PROTECTED_ROUTES: ["/bookmarks", "/post/compose", "/settings"]
   },
   ErrorHandler
 );

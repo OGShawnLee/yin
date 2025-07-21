@@ -3,6 +3,7 @@ import type { InferOutput } from "valibot";
 import { maxLength, minLength, nullish, object, parse, pipe, regex, string, trim } from "valibot";
 
 export type UserShape = InferOutput<typeof UserSchema.USER_SCHEMA>
+export type UpdateUserShape = InferOutput<typeof UserSchema.UPDATE_USER_SCHEMA>;
 
 export default class UserSchema {
   private static DISPLAY_NAME_REGEX = /^[a-zA-Z0-9_]+$/;
@@ -20,9 +21,7 @@ export default class UserSchema {
     minLength(3, "Username must be at least 3 characters long."),
     maxLength(16, "Username must be at most 16 characters long")
   );
-  public static USER_SCHEMA = object({
-    id: Schema.ID_SCHEMA,
-    displayName: this.DISPLAY_NAME_SCHEMA,
+  public static UPDATE_USER_SCHEMA = object({
     name: this.NAME_SCHEMA,
     location: nullish(
       pipe(
@@ -40,6 +39,13 @@ export default class UserSchema {
         maxLength(256, "Description must be at most 256 characters long."),
       )
     ),
+  });
+  public static USER_SCHEMA = object({
+    id: Schema.ID_SCHEMA,
+    displayName: this.DISPLAY_NAME_SCHEMA,
+    name: this.NAME_SCHEMA,
+    location: this.UPDATE_USER_SCHEMA.entries.location,
+    description: this.UPDATE_USER_SCHEMA.entries.description,
     createdAt: Schema.CREATED_AT_SCHEMA,
   });
 

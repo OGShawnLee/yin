@@ -1,5 +1,6 @@
 <script lang="ts">
 	import DateFormatter from '@common/DateFormatter';
+	import { MapPin } from "phosphor-svelte";
 
 	export let data;
 </script>
@@ -23,6 +24,15 @@
 			<h2 class="heading-2">{data.profile.name}</h2>
 			<p class="text-neutral-400">@{data.profile.displayName}</p>
 		</header>
+		{#if data.profile.description}
+			<p class="whitespace-pre-line">{data.profile.description}</p>
+		{/if}
+		{#if data.profile.location}
+			<p class="flex items-center gap-2 text-neutral-400">
+				<MapPin size={24} />
+				{data.profile.location}
+			</p>
+		{/if}
 		<time class="text-sm text-neutral-400" datetime={data.profile.createdAt.toISOString()}>
 			Joined {DateFormatter.getFormattedDate(data.profile.createdAt)} - {DateFormatter.getRelativeDate(
 				data.profile.createdAt

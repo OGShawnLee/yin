@@ -187,7 +187,7 @@ export class YinAuthClient<Payload extends JWTPayload, CurrentUser> {
   }
 
   private isInProtectedRoute(route: string): boolean {
-    return this.CONFIGURATION.PROTECTED_ROUTES.some((it) => route.includes(it));
+    return this.CONFIGURATION.PROTECTED_ROUTES.some(it => route.includes(it));
   }
 
   private createAccessToken(payload: Payload): string {

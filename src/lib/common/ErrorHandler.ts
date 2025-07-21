@@ -1,6 +1,6 @@
 import { ValiError } from 'valibot';
-import UserDisplayableError from './UserDisplayableError';
 import { ConstraintViolationError } from 'gel';
+import UserDisplayableError from './UserDisplayableError';
 import ConstraintError from './ConstraintError';
 
 export type Result<Data, Error> =
@@ -20,6 +20,7 @@ export default class ErrorHandler {
   }
 
   public static handleError(error: unknown): UserDisplayableError {
+    // TODO: ADD BETTER ERROR LOGGING
     console.log(error);
 
     if (error instanceof UserDisplayableError) {
