@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Home - Yin</title>
+	<title>{data.profile.name} (@{data.profile.displayName}) - Yin</title>
 </svelte:head>
 
 <main class="p-20 grid gap-4">
