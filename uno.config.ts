@@ -22,7 +22,8 @@ export default defineConfig({
       fonts: {
         archivo: 'Archivo',
         general: 'General Sans',
-        satoshi: 'Satoshi'
+        satoshi: 'Satoshi',
+        supreme: "Supreme",
       }
     })
   ]
