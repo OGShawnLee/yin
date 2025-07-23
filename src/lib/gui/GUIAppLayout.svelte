@@ -1,12 +1,13 @@
 <script lang="ts">
-	import type { CurrentUserShape } from '@business/schema/AuthSchema';
 	import { Bookmark, House, Pen, User } from 'phosphor-svelte';
-	import { enhance } from '$app/forms';
+	import { CurrentUserState } from './State';
 	import { SignOut } from 'phosphor-svelte';
+	import { enhance } from '$app/forms';
 	import { fade } from 'svelte/transition';
 
-	export let currentUser: CurrentUserShape | null;
 	export let path: string;
+
+	const currentUser = CurrentUserState.getContext();
 
 	function getNameInitials(name: string): string {
 		return name
@@ -23,8 +24,11 @@
 				<House size={24} />
 				Home
 			</a>
-			{#if currentUser}
-				<a class="font-medium hover:text-white flex items-center gap-2" href="/{currentUser.displayName}">
+			{#if $currentUser}
+				<a
+					class="font-medium hover:text-white flex items-center gap-2"
+					href="/{$currentUser.displayName}"
+				>
 					<User size={24} />
 					Profile
 				</a>
@@ -39,17 +43,17 @@
 			{/if}
 		</div>
 		<section class="grid gap-4">
-			{#if currentUser}
+			{#if $currentUser}
 				<h2 class="hidden">User Status</h2>
 				<div class="flex gap-4 items-center">
 					<div
 						class="size-12 flex items-center justify-center bg-gradient-to-l from-teal-400 to-cyan-600 bg-teal-400 font-bold text-lg text-white"
 					>
-						{getNameInitials(currentUser.name)}
+						{getNameInitials($currentUser.name)}
 					</div>
 					<div>
-						<p class="text-lg text-white font-medium">{currentUser.name}</p>
-						<p class="text-neutral-400">@{currentUser.displayName}</p>
+						<p class="text-lg text-white font-medium">{$currentUser.name}</p>
+						<p class="text-neutral-400">@{$currentUser.displayName}</p>
 					</div>
 				</div>
 				<form action="/auth/sign-out" method="post" use:enhance>

@@ -3,6 +3,7 @@
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import GUIInput from './GUIInput.svelte';
 	import GUIFormModal from './GUIFormModal.svelte';
+	// import { CurrentUserState } from './State.svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 
@@ -23,7 +24,14 @@
 	{#snippet fields()}
 		<GUIInput {form} name="name" label="Name" placeholder="Introduce your Name">
 			{#snippet field(props)}
-				<input class="input" type="text" required {...props} placeholder={profile.name} bind:value={$input.name} />
+				<input
+					class="input"
+					type="text"
+					required
+					{...props}
+					placeholder={profile.name}
+					bind:value={$input.name}
+				/>
 			{/snippet}
 		</GUIInput>
 		<GUIInput
@@ -33,12 +41,23 @@
 			placeholder="Introduce your Description"
 		>
 			{#snippet field(props)}
-				<textarea class="text-area" {...props} placeholder={profile.description ?? props.placeholder} bind:value={$input.description}></textarea>
+				<textarea
+					class="text-area"
+					{...props}
+					placeholder={profile.description ?? props.placeholder}
+					bind:value={$input.description}
+				></textarea>
 			{/snippet}
 		</GUIInput>
 		<GUIInput {form} name="location" label="Location" placeholder="Introduce your Location">
 			{#snippet field(props)}
-				<input class="input" type="text" {...props} placeholder={profile.location ?? props.placeholder} bind:value={$input.location} />
+				<input
+					class="input"
+					type="text"
+					{...props}
+					placeholder={profile.location ?? props.placeholder}
+					bind:value={$input.location}
+				/>
 			{/snippet}
 		</GUIInput>
 	{/snippet}
