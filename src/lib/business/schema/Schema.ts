@@ -1,4 +1,4 @@
-import { date, maxLength, minLength, nullish, pipe, string, transform, trim, union, uuid } from "valibot";
+import { date, nullish, pipe, string, transform, union, uuid } from "valibot";
 
 export default class Schema {
   public static ID_SCHEMA = pipe(
