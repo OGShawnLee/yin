@@ -63,15 +63,15 @@ export class YinAuthClient<Payload extends JWTPayload, CurrentUser> {
     return async function handle(input) {
       const payload = await self.findAuthPayloadFromCookies(input.event.cookies);
       const route = input.event.route.id;
-
+      
       if (YinAuthClient.isNullish(payload)) {
         if (route && self.isInProtectedRoute(route)) {
-          throw redirect(302, self.CONFIGURATION.SIGN_IN_ROUTE);
+          redirect(302, self.CONFIGURATION.SIGN_IN_ROUTE);
         }
       }
 
       if (payload && (route === self.CONFIGURATION.SIGN_IN_ROUTE || route === self.CONFIGURATION.SIGN_UP_ROUTE)) {
-        throw redirect(302, '/');
+        redirect(302, '/');
       }
 
       return input.resolve(input.event);
