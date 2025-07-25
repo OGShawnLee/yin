@@ -32,7 +32,7 @@
 					<User size={24} />
 					Profile
 				</a>
-				<a class="font-medium hover:text-white flex items-center gap-2" href="/bookmarks">
+				<a class="font-medium hover:text-white flex items-center gap-2" href="/bookmark">
 					<Bookmark size={24} />
 					Bookmarks
 				</a>

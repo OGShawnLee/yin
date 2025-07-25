@@ -1,4 +1,6 @@
 module default {
+  global currentUserDisplayName: str;
+
   abstract type Record {
     required createdAt: datetime {
       readonly := true;
@@ -47,6 +49,7 @@ module default {
       constraint max_len_value(64);
     }
   }
+
   type Post extending Record {
     required author: User {
       on target delete delete source;
@@ -55,5 +58,41 @@ module default {
       constraint min_len_value(16);
       constraint max_len_value(512);
     }
+    required bookmarkCount: int32 {
+      rewrite insert using(0);
+      default := 0;
+    }
+    property isBookmarked := (
+      select exists (
+        select Bookmark filter .post.id = Post.id and .user.displayName = global currentUserDisplayName
+      )
+    )
+  }
+
+  type Bookmark extending Record {
+    required user: User {
+      on target delete delete source;
+    }
+    required post: Post {
+      on target delete delete source;
+    }
+    required bookmarkedAt: datetime {
+      rewrite insert using(datetime_of_statement());
+      default := datetime_of_statement();
+    }
+
+    trigger increment_bookmark_count after insert for each do (
+      update Post 
+      filter .id = __new__.post.id
+      set { bookmarkCount := .bookmarkCount + 1 } 
+    );
+
+    trigger decrement_bookmark_count after delete for each do (
+      update Post 
+      filter .id = __old__.post.id
+      set { bookmarkCount := .bookmarkCount - 1 } 
+    );
+
+    constraint exclusive on (( .user, .post ));
   }
 }

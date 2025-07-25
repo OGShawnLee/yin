@@ -1,7 +1,7 @@
-import Schema from "$lib/business/schema/Schema";
 import type { InferOutput } from "valibot";
-import { maxLength, minLength, object, parse, pipe, string, trim } from "valibot";
-import AuthSchema from "./AuthSchema";
+import Schema from "@business/schema/Schema";
+import AuthSchema from "@business/schema/AuthSchema";
+import { boolean, integer, maxLength, minLength, number, object, parse, pipe, string, trim } from "valibot";
 
 export type PostShape = InferOutput<typeof PostSchema.POST_SCHEMA>
 export type InsertPostShape = InferOutput<typeof PostSchema.INSERT_POST_SCHEMA>
@@ -19,6 +19,11 @@ export default class PostSchema {
     ...this.INSERT_POST_SCHEMA.entries,
     id: Schema.ID_SCHEMA,
     author: AuthSchema.CURRENT_USER_SCHEMA,
+    bookmarkCount: pipe(
+      number("Bookmark count must be a number."),
+      integer("Bookmark count must be an integer."),
+    ),
+    isBookmarked: boolean("Property isBookmarked must be a boolean."),
     createdAt: Schema.CREATED_AT_SCHEMA,
   });
 

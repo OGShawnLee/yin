@@ -1,11 +1,11 @@
 
-import { YinAuthCrypto } from "$lib/YinAuth";
+import type { UpdateUserShape } from "@business/schema/UserSchema";
 import type { SignUpShape } from "@business/schema/AuthSchema";
+import { YinAuthCrypto } from "$lib/YinAuth";
 import ErrorHandler from "@common/ErrorHandler";
 import NotFoundError from "@db/NotFoundError";
-import DBClient from "@db/DBClient";
 import e from "@db:qb";
-import type { UpdateUserShape } from "@business/schema/UserSchema";
+import { getClient } from "@db/DBClient";
 
 export class UserDAO {
   public static createOne(credentials: SignUpShape) {
@@ -17,7 +17,7 @@ export class UserDAO {
         }),
         name: credentials.name,
         displayName: credentials.displayName,
-      }).run(DBClient);
+      }).run(getClient());
     })
   }
 
@@ -31,7 +31,7 @@ export class UserDAO {
         location: true,
         createdAt: true,
         filter_single: { displayName }
-      })).run(DBClient);
+      })).run(getClient());
 
       if (user) return user;
 
@@ -44,7 +44,7 @@ export class UserDAO {
       return e.update(e.User, () => ({
         set: data,
         filter_single: { displayName }
-      })).run(DBClient);
+      })).run(getClient());
     });
   }
 }

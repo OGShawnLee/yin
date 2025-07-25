@@ -1,8 +1,8 @@
 import type { CurrentUserShape } from "@business/schema/AuthSchema";
 import AuthSchema from "@business/schema/AuthSchema";
-import DBClient from "@db/DBClient";
 import NotFoundError from "@db/NotFoundError";
 import e from "@db:qb";
+import { getClient } from "@db/DBClient";
 
 export default class AuthDAO {
   public static async findCurrentUser(payload: CurrentUserShape): Promise<CurrentUserShape | null> {
@@ -13,7 +13,7 @@ export default class AuthDAO {
       id: user.id,
       name: user.name,
       displayName: user.displayName,
-    }).run(DBClient);
+    }).run(getClient());
 
     if (currentUser.id) {
       return AuthSchema.getValidCurrentUser(currentUser);

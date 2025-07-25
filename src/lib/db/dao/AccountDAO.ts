@@ -1,9 +1,9 @@
 import type { Account } from "@business/schema/AccountSchema";
 import AccountDTO from "@business/dto/AccountDTO";
 import ErrorHandler from "@common/ErrorHandler";
-import DBClient from "@db/DBClient";
 import NotFoundError from "@db/NotFoundError";
 import e from "@db:qb";
+import { getClient } from "@db/DBClient";
 
 export default class AccountDAO {
   public static async findOneByUserDisplayName(displayName: string) {
@@ -19,7 +19,7 @@ export default class AccountDAO {
         password: user.account.password,
         refreshTokenVersion: user.account.refreshTokenVersion,
         createdAt: user.createdAt,
-      }).run(DBClient);
+      }).run(getClient());
       return candidate.id ? new AccountDTO(candidate as Account) : null;
     });
   }
@@ -36,7 +36,7 @@ export default class AccountDAO {
       password: user.account.password,
       refreshTokenVersion: user.account.refreshTokenVersion,
       createdAt: user.createdAt,
-    }).run(DBClient);
+    }).run(getClient());
     
     if (candidate.id) {
       return new AccountDTO(candidate as Account);
