@@ -6,6 +6,15 @@ import e from "@db:qb";
 import { getClient } from "@db/DBClient";
 
 export default class PostDAO {
+  public static POST_SHAPE = e.shape(e.Post, () => ({
+    id: true,
+    content: true,
+    author: { id: true, name: true, displayName: true },
+    bookmarkCount: true,
+    isBookmarked: true,
+    createdAt: true
+  }));
+
   public static createOne(post: InsertPostShape, currentUser: CurrentUserShape) {
     return ErrorHandler.useAwait(() => {
       return e.insert(e.Post, {
@@ -19,13 +28,8 @@ export default class PostDAO {
 
   public static getOne(id: string) {
     return ErrorHandler.useAwait(() => {
-      const data =  e.select(e.Post, () => ({
-        id: true,
-        content: true,
-        author: { id: true, name: true, displayName: true },
-        bookmarkCount: true,
-        isBookmarked: true,
-        createdAt: true,
+      const data = e.select(e.Post, (post) => ({
+        ...this.POST_SHAPE(post),
         filter_single: { id },
       })).run(getClient());
 
@@ -38,12 +42,7 @@ export default class PostDAO {
   public static getAll(currentUser: CurrentUserShape | null) {
     return ErrorHandler.useAwait(() => {
       return e.select(e.Post, (post) => ({
-        id: true,
-        content: true,
-        author: { id: true, name: true, displayName: true },
-        bookmarkCount: true,
-        isBookmarked: true,
-        createdAt: true,
+        ...this.POST_SHAPE(post),
         order_by: { expression: post.createdAt, direction: e.DESC },
       })).run(getClient(currentUser));
     })
@@ -52,12 +51,7 @@ export default class PostDAO {
   public static getAllByAuthor(displayName: string, currentUser: CurrentUserShape | null) {
     return ErrorHandler.useAwait(() => {
       return e.select(e.Post, (post) => ({
-        id: true,
-        content: true,
-        author: { id: true, name: true, displayName: true },
-        bookmarkCount: true,
-        isBookmarked: true,
-        createdAt: true,
+        ...this.POST_SHAPE(post),
         order_by: { expression: post.createdAt, direction: e.DESC },
         filter: e.op(post.author.displayName, '=', displayName)
       })).run(getClient(currentUser));

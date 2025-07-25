@@ -3,6 +3,7 @@ import type { Transaction } from "gel/dist/transaction";
 import ErrorHandler from "@common/ErrorHandler";
 import e from "@db:qb";
 import { getClient } from "@db/DBClient";
+import PostDAO from "./PostDAO";
 
 export default class BookmarkDAO {
   private static createOne(id: string, currentUser: CurrentUserShape, transaction?: Transaction) {
@@ -52,6 +53,20 @@ export default class BookmarkDAO {
       }))
         .run(getClient());
     })
+  }
+
+  public static getAll(currentUser: CurrentUserShape) {
+    return ErrorHandler.useAwait(() => {
+      return e.select(e.Bookmark, (bookmark) => ({
+        id: true,
+        post: PostDAO.POST_SHAPE(bookmark.post),
+        filter: e.op(bookmark.user.displayName, '=', currentUser.displayName),
+        order_by: {
+          expression: bookmark.createdAt,
+          direction: e.DESC
+        }
+      })).run(getClient(currentUser));
+    });
   }
 
   private static deleteOne(id: string, currentUser: CurrentUserShape, transaction?: Transaction) {

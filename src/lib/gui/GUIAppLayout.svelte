@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Bookmark, House, Pen, User } from 'phosphor-svelte';
+	import { Bookmarks, House, Pen, User } from 'phosphor-svelte';
 	import { CurrentUserState } from './State';
 	import { SignOut } from 'phosphor-svelte';
 	import { enhance } from '$app/forms';
@@ -32,8 +32,8 @@
 					<User size={24} />
 					Profile
 				</a>
-				<a class="font-medium hover:text-white flex items-center gap-2" href="/bookmark">
-					<Bookmark size={24} />
+				<a class="font-medium hover:text-white flex items-center gap-2" href="/bookmarks">
+					<Bookmarks size={24} />
 					Bookmarks
 				</a>
 				<a class="font-medium hover:text-white flex items-center gap-2" href="/post/compose">
