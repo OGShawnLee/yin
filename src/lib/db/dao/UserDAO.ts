@@ -30,6 +30,7 @@ export class UserDAO {
         description: true,
         location: true,
         followerCount: true,
+        followingCount: true,
         isFollowing: true,
         createdAt: true,
         filter_single: { displayName },
@@ -45,6 +46,14 @@ export class UserDAO {
     return ErrorHandler.useAwait(() => {
       return e.update(e.User, () => ({
         set: data,
+        filter_single: { displayName }
+      })).run(getClient());
+    });
+  }
+
+  public static deleteOne(displayName: string) {
+    return ErrorHandler.useAwait(() => {
+      return e.delete(e.User, () => ({
         filter_single: { displayName }
       })).run(getClient());
     });

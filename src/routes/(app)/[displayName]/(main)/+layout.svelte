@@ -39,14 +39,30 @@
 		{#if data.profile.description}
 			<p class="whitespace-pre-line">{data.profile.description}</p>
 		{/if}
-		{#if data.profile.followerCount}
-			<div>
-				<a class="text-sm hover:(underline underline-offset-4)" href="/{data.profile.displayName}/followers">
-					<span class="text-white font-medium">
-						{data.profile.followerCount}
-					</span>
-					{data.profile.followerCount === 1 ? 'Follower' : 'Followers'}
-				</a>
+		{#if data.profile.followerCount || data.profile.followingCount}
+			<div class="flex gap-4">
+				{#if data.profile.followerCount}
+					<a
+						class="text-sm text-neutral-400 hover:(underline underline-offset-4)"
+						href="/{data.profile.displayName}/followers"
+					>
+						<span class="text-white font-medium">
+							{data.profile.followerCount}
+						</span>
+						{data.profile.followerCount === 1 ? 'Follower' : 'Followers'}
+					</a>
+				{/if}
+				{#if data.profile.followingCount}
+					<a
+						class="text-sm text-neutral-400 hover:(underline underline-offset-4)"
+						href="/{data.profile.displayName}/following"
+					>
+						<span class="text-white font-medium">
+							{data.profile.followerCount}
+						</span>
+						Following
+					</a>
+				{/if}
 			</div>
 		{/if}
 		{#if data.profile.location}

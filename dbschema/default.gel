@@ -52,6 +52,10 @@ module default {
       rewrite insert using(0);
       default := 0;
     }
+    property followingCount: int32 {
+      rewrite insert using(0);
+      default := 0;
+    }
     property isFollowing := (
       select exists (
         select Follow filter .follower.displayName = global currentUserDisplayName and .followee.id = User.id
@@ -111,6 +115,15 @@ module default {
       set { favouriteCount := .favouriteCount - 1 } 
     );
 
+    trigger notify_post_author after insert for each do (
+      insert Notification {
+        from := __new__.user,
+        user := __new__.post.author,
+        post := __new__.post,
+        kind := NotificationKind.Favourite
+      }
+    );
+
     constraint exclusive on (( .user, .post ));
   }
 
@@ -161,6 +174,45 @@ module default {
       set { followerCount := .followerCount - 1 } 
     );
 
+    trigger increment_follower_following after insert for each do (
+      update User 
+      filter .id = __new__.follower.id
+      set { followingCount := .followingCount + 1 } 
+    );
+
+    trigger decrement_follower_following after delete for each do (
+      update User 
+      filter .id = __old__.follower.id
+      set { followingCount := .followingCount - 1 } 
+    );
+
+    trigger notify_followee after insert for each do (
+      insert Notification {
+        from := __new__.follower,
+        user := __new__.followee,
+        kind := NotificationKind.Follow
+      }
+    );
+
     constraint exclusive on (( .follower, .followee ));
+  }
+
+  scalar type NotificationKind extending enum<Favourite, Follow>;
+
+  type Notification extending Record {
+    required from: User {
+      on target delete delete source;
+    }
+    required user: User {
+      on target delete delete source;
+    }
+    post: Post {
+      on target delete delete source;
+    }
+    required kind: NotificationKind;
+    required isRead: bool {
+      rewrite insert using(false);
+      default := false;
+    }
   }
 }

@@ -62,6 +62,20 @@ export default class FollowDAO {
     });
   }
 
+  public static getAllByFollower(displayName: string) {
+    return ErrorHandler.useAwait(() => {
+      return e.select(e.Follow, (follow) => ({
+        id: true,
+        followee: { id: true, displayName: true, name: true, description: true },
+        filter: e.op(follow.follower.displayName, '=', displayName),
+        order_by: {
+          expression: follow.createdAt,
+          direction: e.DESC
+        }
+      })).run(getClient());
+    });
+  }
+
   private static deleteOne(displayName: string, currentUser: CurrentUserShape, transaction?: Transaction) {
     return ErrorHandler.useAwait(() => {
       return e.delete(e.Follow, (follow) => ({
