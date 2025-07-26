@@ -11,6 +11,8 @@ export default class PostDAO {
     content: true,
     author: { id: true, name: true, displayName: true },
     bookmarkCount: true,
+    favouriteCount: true,
+    isFavourite: true,
     isBookmarked: true,
     createdAt: true
   }));

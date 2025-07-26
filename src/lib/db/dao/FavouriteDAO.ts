@@ -5,11 +5,11 @@ import e from "@db:qb";
 import PostDAO from "./PostDAO";
 import { getClient } from "@db/DBClient";
 
-export default class BookmarkDAO {
+export default class FavouriteDAO {
   private static createOne(id: string, currentUser: CurrentUserShape, transaction?: Transaction) {
     return ErrorHandler.useAwait(() => {
       return ErrorHandler.useAwait(() => {
-        return e.insert(e.Bookmark, {
+        return e.insert(e.Favourite, {
           user: e.select(e.User, () => ({
             filter_single: { displayName: currentUser.displayName }
           })),
@@ -24,11 +24,11 @@ export default class BookmarkDAO {
   public static async createOrDeleteOne(id: string, currentUser: CurrentUserShape) {
     const client = getClient();
     return client.transaction(async (context) => {
-      const bookmark = await this.findOne(id, currentUser, context);
+      const favourite = await this.findOne(id, currentUser, context);
 
-      if (bookmark.error) return bookmark;
+      if (favourite.error) return favourite;
 
-      const fn = bookmark.data ? this.deleteOne : this.createOne;
+      const fn = favourite.data ? this.deleteOne : this.createOne;
       
       return fn(id, currentUser, context);
     });
@@ -36,7 +36,7 @@ export default class BookmarkDAO {
 
   private static findOne(id: string, currentUser: CurrentUserShape, transaction?: Transaction) {
     return ErrorHandler.useAwait(async () => {
-      return await e.select(e.Bookmark, (bookmark) => ({
+      return await e.select(e.Favourite, (favourite) => ({
         id: true,
         user: { id: true, name: true, displayName: true },
         post: {
@@ -46,9 +46,9 @@ export default class BookmarkDAO {
         },
         filter_single:
           e.op(
-            e.op(bookmark.user.displayName, '=', currentUser.displayName),
+            e.op(favourite.user.displayName, '=', currentUser.displayName),
             "and",
-            e.op(bookmark.post.id, '=', e.uuid(id))
+            e.op(favourite.post.id, '=', e.uuid(id))
           )
       }))
         .run(transaction || getClient());
@@ -57,12 +57,12 @@ export default class BookmarkDAO {
 
   public static getAll(currentUser: CurrentUserShape) {
     return ErrorHandler.useAwait(() => {
-      return e.select(e.Bookmark, (bookmark) => ({
+      return e.select(e.Favourite, (favourite) => ({
         id: true,
-        post: PostDAO.POST_SHAPE(bookmark.post),
-        filter: e.op(bookmark.user.displayName, '=', currentUser.displayName),
+        post: PostDAO.POST_SHAPE(favourite.post),
+        filter: e.op(favourite.user.displayName, '=', currentUser.displayName),
         order_by: {
-          expression: bookmark.createdAt,
+          expression: favourite.createdAt,
           direction: e.DESC
         }
       })).run(getClient(currentUser));
@@ -71,11 +71,11 @@ export default class BookmarkDAO {
 
   private static deleteOne(id: string, currentUser: CurrentUserShape, transaction?: Transaction) {
     return ErrorHandler.useAwait(() => {
-      return e.delete(e.Bookmark, (bookmark) => ({
+      return e.delete(e.Favourite, (favourite) => ({
         filter_single: e.op(
-          e.op(bookmark.user.displayName, '=', currentUser.displayName),
+          e.op(favourite.user.displayName, '=', currentUser.displayName),
           "and",
-          e.op(bookmark.post.id, '=', e.uuid(id))
+          e.op(favourite.post.id, '=', e.uuid(id))
         )
       })).run(transaction || getClient());
     });

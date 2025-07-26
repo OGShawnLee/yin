@@ -1,5 +1,6 @@
 import AuthClient from "@business/auth/AuthClient"
 import BookmarkDAO from "@db/dao/BookmarkDAO";
+import FavouriteDAO from "@db/dao/FavouriteDAO";
 import PostDAO from "@db/dao/PostDAO";
 import NotFoundError from "@db/NotFoundError";
 import { error } from "@sveltejs/kit";
@@ -23,5 +24,13 @@ export const actions = {
     if (err) {
       error(500, { message: err.message });
     }
+  },
+  "handle-favourite": async (event) => {
+    const user = await AuthClient.getAuthPayloadFromCookies(event.cookies);
+    const { error: err } = await FavouriteDAO.createOrDeleteOne(event.params.id, user);
+
+    if (err) {
+      error(500, { message: err.message });
+    } 
   }
 }

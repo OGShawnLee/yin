@@ -23,6 +23,11 @@ export default class PostSchema {
       number("Bookmark count must be a number."),
       integer("Bookmark count must be an integer."),
     ),
+    favouriteCount: pipe(
+      number("Favourite count must be a number."),
+      integer("Favourite count must be an integer."),
+    ),
+    isFavourite: boolean("Property isFavourite must be a boolean."),
     isBookmarked: boolean("Property isBookmarked must be a boolean."),
     createdAt: Schema.CREATED_AT_SCHEMA,
   });
