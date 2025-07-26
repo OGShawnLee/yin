@@ -1,6 +1,7 @@
 <script lang="ts">
 	import DateFormatter from '@common/DateFormatter';
-	import { MapPin } from "phosphor-svelte";
+	import { MapPin } from 'phosphor-svelte';
+	import { enhance } from '$app/forms';
 
 	export let data;
 </script>
@@ -13,10 +14,21 @@
 	<header class="h-20 p-4 border-b border-neutral-900 flex items-center justify-between">
 		<h1 class="heading-1">{data.profile.name}</h1>
 		{#if data.currentUser && data.currentUser.displayName === data.profile.displayName}
+			<!-- Edit Profile Button -->
 			<a
-				class="h-10 px-8 flex items-center justify-center bg-white rounded-full text-black font-medium"
+				class="h-10 px-8 flex items-center justify-center bg-white rounded-full text-black font-medium hover:cursor-pointer"
 				href="/settings/profile">Edit Profile</a
 			>
+		{:else if data.currentUser}
+			<!-- Follow Button -->
+			<form action="/{data.profile.displayName}?/handle-follow" method="post" use:enhance>
+				<button
+					type="submit"
+					class="h-10 px-8 flex items-center justify-center bg-white rounded-full text-black font-medium hover:cursor-pointer"
+				>
+					{data.profile.isFollowing ? 'Following' : 'Follow'}
+				</button>
+			</form>
 		{/if}
 	</header>
 	<section class="p-4 grid gap-4 border-b border-neutral-900">
@@ -26,6 +38,12 @@
 		</header>
 		{#if data.profile.description}
 			<p class="whitespace-pre-line">{data.profile.description}</p>
+		{/if}
+		{#if data.profile.followerCount}
+			<p class="text-sm">
+				{data.profile.followerCount}
+				{data.profile.followerCount === 1 ? 'Follower' : 'Followers'}
+			</p>
 		{/if}
 		{#if data.profile.location}
 			<p class="flex items-center gap-2 text-neutral-400">

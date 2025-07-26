@@ -1,6 +1,6 @@
 
 import type { UpdateUserShape } from "@business/schema/UserSchema";
-import type { SignUpShape } from "@business/schema/AuthSchema";
+import type { CurrentUserShape, SignUpShape } from "@business/schema/AuthSchema";
 import { YinAuthCrypto } from "$lib/YinAuth";
 import ErrorHandler from "@common/ErrorHandler";
 import NotFoundError from "@db/NotFoundError";
@@ -21,7 +21,7 @@ export class UserDAO {
     })
   }
 
-  public static getOne(displayName: string) {
+  public static getOne(displayName: string, currentUser: CurrentUserShape | null) {
     return ErrorHandler.useAwait(async () => {
       const user = await e.select(e.User, () => ({
         id: true,
@@ -29,9 +29,11 @@ export class UserDAO {
         displayName: true,
         description: true,
         location: true,
+        followerCount: true,
+        isFollowing: true,
         createdAt: true,
-        filter_single: { displayName }
-      })).run(getClient());
+        filter_single: { displayName },
+      })).run(getClient(currentUser));
 
       if (user) return user;
 
