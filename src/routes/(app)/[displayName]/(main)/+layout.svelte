@@ -40,10 +40,14 @@
 			<p class="whitespace-pre-line">{data.profile.description}</p>
 		{/if}
 		{#if data.profile.followerCount}
-			<p class="text-sm">
-				{data.profile.followerCount}
-				{data.profile.followerCount === 1 ? 'Follower' : 'Followers'}
-			</p>
+			<div>
+				<a class="text-sm hover:(underline underline-offset-4)" href="/{data.profile.displayName}/followers">
+					<span class="text-white font-medium">
+						{data.profile.followerCount}
+					</span>
+					{data.profile.followerCount === 1 ? 'Follower' : 'Followers'}
+				</a>
+			</div>
 		{/if}
 		{#if data.profile.location}
 			<p class="flex items-center gap-2 text-neutral-400">

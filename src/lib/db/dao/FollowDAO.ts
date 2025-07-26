@@ -48,16 +48,17 @@ export default class FollowDAO {
     })
   }
 
-  public static getAll(currentUser: CurrentUserShape) {
+  public static getAllByFollowee(displayName: string) {
     return ErrorHandler.useAwait(() => {
       return e.select(e.Follow, (follow) => ({
         id: true,
-        filter: e.op(follow.follower.displayName, '=', currentUser.displayName),
+        follower: { id: true, displayName: true, name: true, description: true },
+        filter: e.op(follow.followee.displayName, '=', displayName),
         order_by: {
           expression: follow.createdAt,
           direction: e.DESC
         }
-      })).run(getClient(currentUser));
+      })).run(getClient());
     });
   }
 

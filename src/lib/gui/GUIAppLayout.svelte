@@ -47,7 +47,7 @@
 				<h2 class="hidden">User Status</h2>
 				<div class="flex gap-4 items-center">
 					<div
-						class="size-12 flex items-center justify-center bg-gradient-to-l from-teal-400 to-cyan-600 bg-teal-400 font-bold text-lg text-white"
+						class="size-12 flex items-center justify-center bg-gradient-to-l from-teal-400 to-cyan-600 bg-teal-400 font-bold text-lg"
 					>
 						{getNameInitials($currentUser.name)}
 					</div>
