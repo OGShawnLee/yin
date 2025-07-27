@@ -2,6 +2,7 @@ import { ValiError } from 'valibot';
 import { ConstraintViolationError } from 'gel';
 import UserDisplayableError from './UserDisplayableError';
 import ConstraintError from './ConstraintError';
+import NotFoundError from '@db/NotFoundError';
 
 export type Result<Data, Error> =
   | { data: Data; error: null; status: 'Success' }
@@ -23,7 +24,7 @@ export default class ErrorHandler {
     // TODO: ADD BETTER ERROR LOGGING
     console.log(error);
 
-    if (error instanceof UserDisplayableError) {
+    if (error instanceof UserDisplayableError || error instanceof NotFoundError) {
       return error;
     }
 
