@@ -4,6 +4,21 @@ import { presetWind4 } from 'unocss/preset-wind4';
 import { transformerDirectives, transformerVariantGroup } from 'unocss';
 
 export default defineConfig({
+  theme: {
+    colors: {
+      "black": "#000000",
+      "input": "#080808",
+      "inactive": "#202020",
+      "side": "#787878",
+      "common": "#C8C8C8",
+      "white": "#FFFFFF",
+      "main": "#84CC16",
+      "main-hover": "#4D7C0F",
+      "danger": "#F43F5E",
+      "danger-hover": "#BE123C",
+      "pro": "#EAB308",
+    },
+  },
   shortcuts: {
     input:
       'h-12 px-4 w-full border border-neutral-800 text-white font-medium placeholder-neutral-500',
