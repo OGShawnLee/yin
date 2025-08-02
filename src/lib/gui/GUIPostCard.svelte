@@ -5,8 +5,6 @@
 	import { enhance } from '$app/forms';
 
 	export let post: PostShape;
-
-
 </script>
 
 <div class="grid gap-2 p-4 border-b border-neutral-900">
