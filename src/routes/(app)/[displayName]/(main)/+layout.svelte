@@ -10,7 +10,7 @@
 	<title>{data.profile.name} (@{data.profile.displayName}) - Yin</title>
 </svelte:head>
 
-<main class="p-20 grid gap-4">
+<main class="py-20 grid gap-4">
 	<header class="h-20 p-4 border-b border-neutral-900 flex items-center justify-between">
 		<h1 class="heading-1">{data.profile.name}</h1>
 		{#if data.currentUser && data.currentUser.displayName === data.profile.displayName}
