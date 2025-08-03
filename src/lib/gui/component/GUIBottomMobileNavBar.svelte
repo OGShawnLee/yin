@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { CurrentUserState } from '@gui/State';
 	import {
 		Bell,
@@ -11,6 +10,7 @@
 		SignOut,
 		User
 	} from 'phosphor-svelte';
+	import { enhance } from '$app/forms';
 
 	export let route: 'Home' | 'Profile' | 'Search' | 'Bookmarks' | 'None';
 

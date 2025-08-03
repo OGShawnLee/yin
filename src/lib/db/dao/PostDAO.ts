@@ -50,6 +50,25 @@ export default class PostDAO {
     })
   }
 
+  public static getAllFromFolloweed(currentUser: CurrentUserShape) {
+    return ErrorHandler.useAwait(() => {
+      return e.select(e.Post, (post) => ({
+        ...this.POST_SHAPE(post),
+        order_by: { expression: post.createdAt, direction: e.DESC },
+        filter: e.op(
+          "exists",
+          e.select(e.Follow, (follow) => ({
+            filter_single: e.op(
+              e.op(follow.follower.displayName, '=', currentUser.displayName),
+              "and",
+              e.op(follow.followee.displayName, '=', post.author.displayName)
+            ),
+          }))
+        ),
+      })).run(getClient(currentUser));
+    })
+  }
+
   public static getAllByAuthor(displayName: string, currentUser: CurrentUserShape | null) {
     return ErrorHandler.useAwait(() => {
       return e.select(e.Post, (post) => ({
