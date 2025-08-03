@@ -8,18 +8,19 @@
 		form: SuperForm<Form>;
 		name: Path;
 		label: string;
+		'hidden-label'?: boolean;
 		field: Snippet<[ControlAttrs & { placeholder: string }]>;
 		placeholder: string;
 	}
 
-	const { form, name, field, placeholder, label }: Properties = $props();
+	const { form, name, field, placeholder, label, "hidden-label": hiddenLabel }: Properties = $props();
 </script>
 
 <div class="grid gap-2">
 	<Field {form} {name}>
 		<Control>
 			{#snippet children({ props })}
-				<Label class="text-white">{label}</Label>
+				<Label class="text-white font-medium {hiddenLabel ? 'sr-only' : 'inline'}">{label}</Label>
 				{@render field({ ...props, placeholder })}
 			{/snippet}
 		</Control>

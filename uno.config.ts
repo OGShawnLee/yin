@@ -21,10 +21,11 @@ export default defineConfig({
   },
   shortcuts: {
     input:
-      'h-12 px-4 w-full border border-neutral-800 text-white font-medium placeholder-neutral-500',
-    "text-area": "min-h-12 px-4 py-3 w-full border border-neutral-800 text-white font-medium leading-relaxed placeholder-neutral-500",
-    button: 'w-full px-4 h-12 flex items-center justify-center text-white font-medium',
-    'button--main': 'border border-teal-400 hover:bg-teal-950',
+      'h-10 px-4 w-full bg-input rounded-lg border border-inactive text-white placeholder-side outline-none focus:border-white',
+    "text-area": "min-h-10 px-4 py-3 w-full bg-input rounded-lg border border-inactive text-white leading-relaxed placeholder-side outline-none resize-none focus:border-white",
+    button: 'w-full px-4 h-10 flex items-center justify-center text-white font-medium',
+    'button--main': 'h-10 px-8 flex items-center justify-center bg-main hover:bg-main-hover text-white font-bold rounded-lg outline-none focus:(ring ring-white)',
+    'button--side': "h-10 px-8 flex items-center justify-center bg-inactive hover:bg-transparent text-white rounded-lg focus:(ring ring-white)",
     'button-square': 'size-12 flex items-center justify-center text-white font-medium',
     'heading-1': "text-3xl font-bold text-white tracking-tight",
     "heading-2": "text-2xl font-bold text-white tracking-tight",
@@ -35,10 +36,7 @@ export default defineConfig({
     presetWebFonts({
       provider: 'fontshare',
       fonts: {
-        archivo: 'Archivo',
-        general: 'General Sans',
         satoshi: 'Satoshi',
-        supreme: "Supreme",
       }
     })
   ]

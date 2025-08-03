@@ -6,6 +6,6 @@
 
 <style>
 	:global(body) {
-		--uno: 'font-supreme bg-black text-neutral-300';
+		--uno: 'font-satoshi bg-black text-common';
 	}
 </style>

@@ -3,7 +3,6 @@
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import GUIInput from './GUIInput.svelte';
 	import GUIFormModal from './GUIFormModal.svelte';
-	// import { CurrentUserState } from './State.svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 
@@ -62,8 +61,8 @@
 		</GUIInput>
 	{/snippet}
 	{#snippet button()}
-		<div class="grid sm:grid-cols-2 gap-4">
-			<button class="button button--main" type="submit"> Update Profile </button>
+		<div class="flex gap-4">
+			<button class="button button--main" type="submit"> Save </button>
 			<a class="button" href="/"> Cancel </a>
 		</div>
 	{/snippet}

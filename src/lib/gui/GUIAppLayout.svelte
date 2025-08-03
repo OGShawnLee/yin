@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Bookmarks, House, Pen, User } from 'phosphor-svelte';
-	import { CurrentUserState } from './State';
+	import { CurrentUserState } from '@gui/State';
 	import { SignOut } from 'phosphor-svelte';
 	import { enhance } from '$app/forms';
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
+	import { circIn } from 'svelte/easing';
 
 	export let path: string;
 
@@ -47,7 +48,7 @@
 				<h2 class="hidden">User Status</h2>
 				<div class="flex gap-4 items-center">
 					<div
-						class="size-12 flex items-center justify-center bg-gradient-to-l from-teal-400 to-cyan-600 bg-teal-400 font-bold text-lg"
+						class="size-12 flex items-center justify-center bg-gradient-to-l from-teal-400 to-cyan-600 bg-main rounded-lg font-bold text-lg"
 					>
 						{getNameInitials($currentUser.name)}
 					</div>
@@ -67,7 +68,10 @@
 		</section>
 	</nav>
 	{#key path}
-		<main class="w-full flex flex-col xl:flex-[600px]" in:fade={{ duration: 300 }}>
+		<main
+			class="w-full flex flex-col xl:px-20 xl:flex-[600px]"
+			in:fade={{ duration: 350, easing: circIn }}
+		>
 			<slot />
 		</main>
 	{/key}

@@ -5,8 +5,9 @@ import { error, redirect } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { valibot } from 'sveltekit-superforms/adapters';
 
-export async function load() {
+export async function load(event) {
   return {
+    currentUser: await AuthClient.getAuthPayloadFromCookies(event.cookies),
     form: await superValidate(valibot(PostSchema.INSERT_POST_SCHEMA))
   };
 }

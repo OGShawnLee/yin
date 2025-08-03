@@ -1,8 +1,10 @@
 <script lang="ts">
 	import AuthSchema, { type SignUpShape } from '@business/schema/AuthSchema';
 	import type { SuperValidated } from 'sveltekit-superforms';
-	import GUIInput from './GUIInput.svelte';
-	import GUIFormModal from './GUIFormModal.svelte';
+	import AUTH_IMAGE from '@gui/images/AUTH-IMAGE.jpg';
+	import GUIFormModal from '@gui/GUIFormModal.svelte';
+	import GUIInput from '@gui/GUIInput.svelte';
+	import GUILogo from '@gui/component/GUILogo.svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 
@@ -18,17 +20,10 @@
 	<title>Sign Up - Yin</title>
 </svelte:head>
 
-<GUIFormModal
-	{enhance}
-	title="Create Account"
-	subtitle="Welcome to Yin. Please fill in the details to create your Yin Account."
->
+<img class="absolute top-0 sm:hidden" src={AUTH_IMAGE} alt="" />
+
+<GUIFormModal {enhance} title="Sign Up" logo>
 	{#snippet fields()}
-		<GUIInput {form} name="email" label="Email" placeholder="What is your Email?">
-			{#snippet field(props)}
-				<input class="input" type="email" {...props} required bind:value={$input.email} />
-			{/snippet}
-		</GUIInput>
 		<GUIInput {form} name="name" label="Name" placeholder="What is your Name?">
 			{#snippet field(props)}
 				<input class="input" type="text" {...props} required bind:value={$input.name} />
@@ -37,6 +32,11 @@
 		<GUIInput {form} name="displayName" label="Username" placeholder="What will be your Username?">
 			{#snippet field(props)}
 				<input class="input" type="text" {...props} required bind:value={$input.displayName} />
+			{/snippet}
+		</GUIInput>
+		<GUIInput {form} name="email" label="Email" placeholder="What is your Email?">
+			{#snippet field(props)}
+				<input class="input" type="email" {...props} required bind:value={$input.email} />
 			{/snippet}
 		</GUIInput>
 		<GUIInput {form} name="password" label="Password" placeholder="What will be your Password?">
@@ -48,7 +48,7 @@
 			{form}
 			name="confirmPassword"
 			label="Confirm Password"
-			placeholder="Can you introduce your Password again?"
+			placeholder="Enter your Password again"
 		>
 			{#snippet field(props)}
 				<input
@@ -62,10 +62,16 @@
 		</GUIInput>
 	{/snippet}
 	{#snippet button()}
-    <div class="grid sm:grid-cols-2 gap-4">
-      <button class="button button--main" type="submit"> Continue </button>
-      <a class="button" href="/"> Cancel </a>
-    </div>
-    <a class="button text-sm" href="/auth/sign-in">Already have an Account?</a>
+		<button class="button--main" type="submit"> Continue </button>
+		<a class="button text-sm" href="/auth/sign-in">Already have an Account?</a>
 	{/snippet}
 </GUIFormModal>
+
+<style>
+	:global(body) {
+		background-image: url(AUTH_IMAGE);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+</style>

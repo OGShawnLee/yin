@@ -4,4 +4,4 @@
   export let data;
 </script>
 
-<GUIRegisterPost data={data.form} />
+<GUIRegisterPost data={data.form} currentUser={data.currentUser} />

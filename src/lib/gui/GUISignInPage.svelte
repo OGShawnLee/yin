@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Schema, { type SignInShape } from '@business/schema/AuthSchema';
 	import type { SuperValidated } from 'sveltekit-superforms';
+	import AUTH_IMAGE from '@gui/images/AUTH-IMAGE.jpg';
 	import GUIInput from './GUIInput.svelte';
 	import GUIFormModal from './GUIFormModal.svelte';
 	import { superForm } from 'sveltekit-superforms';
@@ -18,7 +19,9 @@
 	<title>Sign In - Yin</title>
 </svelte:head>
 
-<GUIFormModal {enhance} title="Sign In">
+<img class="absolute top-0 sm:hidden" src={AUTH_IMAGE} alt="" />
+
+<GUIFormModal {enhance} title="Sign In" logo>
 	{#snippet fields()}
 		<GUIInput {form} name="displayName" label="Username" placeholder="What is your Username?">
 			{#snippet field(props)}
@@ -32,10 +35,7 @@
 		</GUIInput>
 	{/snippet}
 	{#snippet button()}
-    <div class="grid sm:grid-cols-2 gap-4">
-      <button class="button button--main" type="submit"> Sign In </button>
-      <a class="button" href="/"> Cancel </a>
-    </div>
+		<button class="button--main" type="submit"> Sign In </button>
     <a class="button text-sm" href="/auth/sign-up">Don't have an Account?</a>
 	{/snippet}
 </GUIFormModal>

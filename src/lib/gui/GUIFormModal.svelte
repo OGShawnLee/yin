@@ -1,36 +1,52 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { X } from 'phosphor-svelte';
+	import GUILogo from '@gui/component/GUILogo.svelte';
 
 	interface Properties {
 		enhance: (el: HTMLFormElement) => void;
 		fields: Snippet<[]>;
 		button: Snippet<[]>;
 		title: string;
-		subtitle?: string;
+		logo?: boolean;
 	}
 
-	const { enhance, fields, button, title, subtitle }: Properties = $props();
+	const { enhance, fields, button, title, logo = false }: Properties = $props();
 </script>
 
-<main class="min-h-screen flex items-center justify-center">
-	<form
-		class="max-w-xl w-full mx-auto flex flex-col gap-8 border border-neutral-900"
-		method="POST"
-		use:enhance
-	>
-		<header class="p-8 grid gap-2 border-b border-neutral-900">
-			<h1 class="text-2xl text-white font-semibold tracking-tight">{title}</h1>
-			{#if subtitle}
-				<p class="text-neutral-400 text-sm">{subtitle}</p>
-			{/if}
-		</header>
-		<div class="pb-8 px-8 flex flex-col gap-4">
-			<div class="contents">
-				{@render fields()}
+<main
+	class="min-h-screen py-8 px-8 flex flex-col items-center justify-center bg-black/80 sm:backdrop-filter-none backdrop-filter backdrop-blur-sm"
+>
+	<div class="max-w-xl w-full mx-auto grid gap-4">
+		{#if logo}
+			<div class="px-8">
+				<GUILogo />
 			</div>
-			<div class="grid gap-4">
-				{@render button()}
+		{/if}
+		<form
+			class="max-w-xl w-full mx-auto mx-8 flex flex-col gap-8 border rounded-2xl border-inactive"
+			method="POST"
+			use:enhance
+		>
+			<header class="h-20 px-8 flex items-center justify-between border-b-2 border-neutral-900">
+				<h1 class="text-2xl text-white font-semibold tracking-tight">{title}</h1>
+				<a
+					class="size-10 min-w-10 flex items-center justify-center bg-input border rounded-lg border-inactive outline-none focus:(ring ring-white)"
+					href="/"
+					aria-label="Close"
+				>
+					<X class="text-white" size={24} />
+					<p class="sr-only">Close</p>
+				</a>
+			</header>
+			<div class="pb-8 px-8 grid gap-4">
+				<div class="grid gap-4">
+					{@render fields()}
+				</div>
+				<div class="mt-4 grid gap-4">
+					{@render button()}
+				</div>
 			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 </main>
