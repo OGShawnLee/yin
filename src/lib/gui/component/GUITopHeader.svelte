@@ -6,7 +6,7 @@
 </script>
 
 <header
-	class="fixed xl:sticky top-0 inset-x-0 h-20 px-8 flex items-center justify-between gap-8 bg-black/70 backdrop-filter backdrop-blur-sm border-b-2 border-inactive"
+	class="fixed z-10 xl:sticky top-0 inset-x-0 h-20 px-8 flex items-center justify-between gap-8 bg-black/70 backdrop-filter backdrop-blur-sm border-b-2 border-inactive"
 >
 	<div class="flex items-center gap-8">
 		{#if href}
