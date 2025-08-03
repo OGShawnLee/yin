@@ -65,7 +65,7 @@
 							href="/{data.profile.displayName}/following"
 						>
 							<span class="text-white font-black">
-								{data.profile.followerCount}
+								{data.profile.followingCount}
 							</span>
 							Following
 						</a>

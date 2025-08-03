@@ -12,7 +12,7 @@
 	} from 'phosphor-svelte';
 	import { enhance } from '$app/forms';
 
-	export let route: 'Home' | 'Profile' | 'Search' | 'Bookmarks' | 'None';
+	export let route: 'Home' | 'Profile' | 'Notifications' | 'Search' | 'Bookmarks' | 'None';
 
 	const currentUser = CurrentUserState.getContext();
 </script>
@@ -55,23 +55,23 @@
 			<Pen size={24} />
 			<p class="sr-only">Create Post</p>
 		</a>
-		<a
+		<!-- TODO: Add Mobile Sidebar -->
+		<!-- <a
 			class="size-12 min-w-12 flex items-center justify-center text-white"
 			href="/bookmarks"
 			aria-label="Bookmarks"
 		>
 			<Bookmarks size={24} weight={route === 'Bookmarks' ? 'fill' : 'regular'} />
 			<p class="sr-only">Bookmarks</p>
-		</a>
-		<!-- TODO: Add Notification Feature -->
-		<!-- <a
+		</a> -->
+		<a
 			class="size-12 min-w-12 flex items-center justify-center text-white"
 			href="/notifications"
 			aria-label="Notifications"
 		>
 			<Bell size={24} weight={route === 'Notifications' ? 'fill' : 'regular'} />
 			<p class="sr-only">Notifications</p>
-		</a> -->
+		</a>
 	{:else}
 		<a
 			class="size-12 min-w-12 flex items-center justify-center text-white"
