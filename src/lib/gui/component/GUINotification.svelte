@@ -6,7 +6,7 @@
 	export let notification: NotificationShape;
 </script>
 
-<div class="px-8 py-4 flex items-start gap-2 border-b border-inactive">
+<div class="px-8 py-4 flex items-start gap-2 border-b border-inactive text-white">
 	<div class="size-10 min-w-10 flex items-center justify-center">
 		<svelte:component
 			this={notification.kind === 'Follow' ? UserPlus : Heart}
