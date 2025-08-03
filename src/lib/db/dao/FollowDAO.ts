@@ -5,6 +5,16 @@ import e from "@db:qb";
 import { getClient } from "@db/DBClient";
 
 export default class FollowDAO {
+  private static USER_PROFILE_CARD_SHAPE = e.shape(e.User, () => ({
+    id: true,
+    displayName: true,
+    name: true,
+    description: true,
+    isFounder: true,
+    isPro: true,
+    isStaff: true, 
+  }));
+
   private static createOne(displayName: string, currentUser: CurrentUserShape, transaction?: Transaction) {
     return ErrorHandler.useAwait(() => {
       return ErrorHandler.useAwait(() => {
@@ -52,7 +62,7 @@ export default class FollowDAO {
     return ErrorHandler.useAwait(() => {
       return e.select(e.Follow, (follow) => ({
         id: true,
-        follower: { id: true, displayName: true, name: true, description: true },
+        follower: this.USER_PROFILE_CARD_SHAPE(follow.follower),
         filter: e.op(follow.followee.displayName, '=', displayName),
         order_by: {
           expression: follow.createdAt,
@@ -66,7 +76,7 @@ export default class FollowDAO {
     return ErrorHandler.useAwait(() => {
       return e.select(e.Follow, (follow) => ({
         id: true,
-        followee: { id: true, displayName: true, name: true, description: true },
+        followee: this.USER_PROFILE_CARD_SHAPE(follow.followee),
         filter: e.op(follow.follower.displayName, '=', displayName),
         order_by: {
           expression: follow.createdAt,

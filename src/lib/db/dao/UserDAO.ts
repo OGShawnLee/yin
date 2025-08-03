@@ -32,6 +32,9 @@ export class UserDAO {
         followerCount: true,
         followingCount: true,
         isFollowing: true,
+        isPro: true,
+        isFounder: true,
+        isStaff: true,
         createdAt: true,
         filter_single: { displayName },
       })).run(getClient(currentUser));

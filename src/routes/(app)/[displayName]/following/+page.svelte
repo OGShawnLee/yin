@@ -11,6 +11,9 @@
 			name={follow.followee.name}
 			displayName={follow.followee.displayName}
 			description={follow.followee.description}
+			isFounder={follow.followee.isFounder}
+			isPro={follow.followee.isPro}
+			isStaff={follow.followee.isStaff}
 		/>
 	{/each}
 </GUIFollowLayout>
