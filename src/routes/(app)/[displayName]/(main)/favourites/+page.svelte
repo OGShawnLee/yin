@@ -2,7 +2,7 @@
 	import GUIPostCard from '@gui/component/GUICardPost.svelte';
 	import GUINavigationTab from '@gui/component/GUINavigationTab.svelte';
 	import { format } from '$lib';
-	
+
 	export let data;
 </script>
 
@@ -12,17 +12,17 @@
 
 <div class="md:(grid gap-4)">
 	<GUINavigationTab
-		route="Posts"
+		route="Favourites"
 		routes={[
 			{ label: 'Posts', href: format('/{0}', data.profile.displayName) },
-			{ label: 'Favourites', href: format('/{0}/favourites', data.profile.displayName) },
+			{ label: 'Favourites', href: format('/{0}/favourites', data.profile.displayName) }
 		]}
 	/>
 	<div>
-		<h2 class="sr-only">Recent Posts</h2>
+		<h2 class="sr-only">Recent Favourite Posts</h2>
 		<ul>
-			{#each data.postList as post (post.id)}
-				<GUIPostCard {post} />
+			{#each data.favouriteList as favourite (favourite.id)}
+				<GUIPostCard post={favourite.post} />
 			{/each}
 		</ul>
 	</div>

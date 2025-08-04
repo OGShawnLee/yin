@@ -3,6 +3,14 @@
 	export let href = '';
 	export let subtitle = '';
 	export let subhref = '';
+
+	function handleLongTitle(title: string) {
+		if (title.length > 12) {
+			return title.slice(0, 12) + '...';
+		}
+
+		return title;
+	}
 </script>
 
 <header
@@ -12,12 +20,22 @@
 		{#if href}
 			<a {href}>
 				<h1 class="text-xl font-bold text-white">
-					{title}
+					<span class="sm:hidden">
+						{handleLongTitle(title)}
+					</span>
+					<span class="hidden sm:inline">
+						{title}
+					</span>
 				</h1>
 			</a>
 		{:else}
 			<h1 class="text-xl font-bold text-white">
-				{title}
+				<span class="sm:hidden">
+					{handleLongTitle(title)}
+				</span>
+				<span class="hidden sm:inline">
+					{title}
+				</span>
 			</h1>
 		{/if}
 		{#if subtitle}

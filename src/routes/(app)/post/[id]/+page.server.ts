@@ -13,7 +13,7 @@ export async function load(event) {
     error(status, { message: err.message });
   }
 
-  return { post: data }
+  return { post: data };
 }
 
 export const actions = {
@@ -31,6 +31,6 @@ export const actions = {
 
     if (err) {
       error(500, { message: err.message });
-    } 
+    }
   }
 }

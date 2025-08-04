@@ -55,12 +55,12 @@ export default class FavouriteDAO {
     })
   }
 
-  public static getAll(currentUser: CurrentUserShape) {
+  public static getAll(displayName: string, currentUser: CurrentUserShape | null) {
     return ErrorHandler.useAwait(() => {
       return e.select(e.Favourite, (favourite) => ({
         id: true,
         post: PostDAO.POST_SHAPE(favourite.post),
-        filter: e.op(favourite.user.displayName, '=', currentUser.displayName),
+        filter: e.op(favourite.user.displayName, '=', displayName),
         order_by: {
           expression: favourite.createdAt,
           direction: e.DESC
