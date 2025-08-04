@@ -7,8 +7,6 @@ export async function load(event) {
     await AuthClient.getAuthPayloadFromCookies(event.cookies)
   );
 
-  console.log(data, err)
-
   if (err) {
     error(500, { message: err.message })
   }

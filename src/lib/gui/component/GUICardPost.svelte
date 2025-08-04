@@ -1,54 +1,84 @@
 <script lang="ts">
 	import type { PostShape } from '@business/schema/PostSchema';
-	import GUIUserHeader from '@gui/component/GUIUserHeader.svelte';
 	import GUIDateTime from '@gui/component/GUIDateTime.svelte';
-	import DateFormatter from '@common/DateFormatter';
-	import { BookmarkSimple, Heart } from 'phosphor-svelte';
+	import GUIUserHeader from '@gui/component/GUIUserHeader.svelte';
+	import { BookmarkSimple, Heart, Recycle } from 'phosphor-svelte';
 	import { enhance } from '$app/forms';
 
 	export let post: PostShape;
 </script>
 
-<div class="grid gap-4 py-4 px-8 border-b-2 border-neutral-900">
-	<GUIUserHeader name={post.author.name} displayName={post.author.displayName} />
-	<p class="leading-normal whitespace-pre-line">{post.content}</p>
-	<GUIDateTime createdAt={post.createdAt} />
-	<div class="flex items-center gap-4">
-		<form action="/post/{post.id}?/handle-bookmark" method="post" use:enhance>
-			<button
-				type="submit"
-				class="flex items-center gap-2 text-xs hover:cursor-pointer"
-				class:text-white={post.isBookmarked}
-				aria-label="Bookmark Post"
-			>
-				<BookmarkSimple
-					class="text-current"
-					size={16}
-					weight={post.isBookmarked ? 'fill' : 'regular'}
-				/>
-				{#if post.bookmarkCount > 0}
-					<p class="text-white font-black">
-						{post.bookmarkCount}
-					</p>
-				{/if}
-				<p class="text-common">Bookmark Post</p>
-			</button>
-		</form>
-		<form action="/post/{post.id}?/handle-favourite" method="post" use:enhance>
-			<button
-				type="submit"
-				class="flex items-center gap-2 text-xs hover:cursor-pointer"
-				class:text-white={post.isFavourite}
-				aria-label="Like Post"
-			>
-				<Heart class="text-current" size={16} weight={post.isFavourite ? 'fill' : 'regular'} />
-				{#if post.favouriteCount > 0}
-					<p class="text-white font-black">
-						{post.favouriteCount}
-					</p>
-				{/if}
-				<p class="text-common">Like Post</p>
-			</button>
-		</form>
+{#if post.repostOf}
+	<svelte:self post={post.repostOf}>
+		<span class="flex items-center gap-2 text-xs">
+			<Recycle class="text-current" size={16} weight="fill" />
+			<p>
+				<a class="text-white font-bold" href="/{post.author.displayName}">
+					{post.author.name}
+					<span class="text-side">(@{post.author.displayName})</span>
+				</a>
+				reposted.
+			</p>
+		</span>
+	</svelte:self>
+{:else}
+	<div class="grid gap-4 py-4 px-8 border-b-2 border-neutral-900">
+		<slot />
+		<GUIUserHeader name={post.author.name} displayName={post.author.displayName} />
+		{#if post.content}
+			<p class="leading-normal whitespace-pre-line">{post.content}</p>
+		{/if}
+		<GUIDateTime createdAt={post.createdAt} />
+		<div class="flex items-center gap-4">
+			<form action="/post/{post.id}?/handle-bookmark" method="post" use:enhance>
+				<button
+					type="submit"
+					class="flex items-center gap-2 text-xs hover:cursor-pointer"
+					aria-label="Bookmark Post"
+				>
+					<BookmarkSimple
+						class={post.isBookmarked ? 'text-blue-500' : 'text-current'}
+						size={16}
+						weight={post.isBookmarked ? 'fill' : 'regular'}
+					/>
+					{#if post.bookmarkCount > 0}
+						<p class="text-white font-black">
+							{post.bookmarkCount}
+						</p>
+					{/if}
+					<p class="text-common">Bookmark Post</p>
+				</button>
+			</form>
+			<form action="/post/{post.id}?/handle-favourite" method="post" use:enhance>
+				<button
+					type="submit"
+					class="flex items-center gap-2 text-xs hover:cursor-pointer"
+					aria-label="Like Post"
+				>
+					<Heart class={post.isFavourite ? 'text-danger' : 'text-current'} size={16} weight={post.isFavourite ? 'fill' : 'regular'} />
+					{#if post.favouriteCount > 0}
+						<p class="text-white font-black">
+							{post.favouriteCount}
+						</p>
+					{/if}
+					<p class="text-common">Like Post</p>
+				</button>
+			</form>
+			<form action="/post/{post.id}?/create-repost" method="post" use:enhance>
+				<button
+					type="submit"
+					class="flex items-center gap-2 text-xs hover:cursor-pointer"
+					aria-label="Repost"
+				>
+					<Recycle class={post.isReposted ? 'text-main' : 'text-current'} size={16} weight={post.isReposted ? 'fill' : 'regular'} />
+					{#if post.repostCount > 0}
+						<p class="text-white font-black">
+							{post.repostCount}
+						</p>
+					{/if}
+					<p class="text-common">Repost</p>
+				</button>
+			</form>
+		</div>
 	</div>
-</div>
+{/if}

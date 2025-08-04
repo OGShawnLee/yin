@@ -1,15 +1,21 @@
 <script lang="ts">
 	import type { NotificationShape } from '@business/schema/NotificationSchema';
 	import GUIDateTime from '@gui/component/GUIDateTime.svelte';
-	import { Heart, UserPlus } from 'phosphor-svelte';
+	import { Heart, Recycle, UserPlus } from 'phosphor-svelte';
 
 	export let notification: NotificationShape;
+
+	const NOTIFICATION_KIND_ICONS = {
+		Favourite: Heart,
+		Follow: UserPlus,
+		Repost: Recycle
+	};	
 </script>
 
 <div class="px-8 py-4 flex items-start gap-2 border-b border-inactive text-white">
 	<div class="size-10 min-w-10 flex items-center justify-center">
 		<svelte:component
-			this={notification.kind === 'Follow' ? UserPlus : Heart}
+			this={NOTIFICATION_KIND_ICONS[notification.kind]}
 			class="text-white"
 			size={28}
 		/>
@@ -27,6 +33,9 @@
 				<a class="underline underline-offset-4" href="/post/{notification.post?.id}"> Post </a>.
 			{:else if notification.kind === 'Follow'}
 				started following you.
+			{:else}
+				reposted your
+				<a class="underline underline-offset-4" href="/post/{notification.post?.id}"> Post </a>.
 			{/if}
 		</p>
 		<GUIDateTime createdAt={notification.createdAt} />

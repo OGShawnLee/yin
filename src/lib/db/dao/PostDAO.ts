@@ -6,15 +6,21 @@ import e from "@db:qb";
 import { getClient } from "@db/DBClient";
 
 export default class PostDAO {
-  public static POST_SHAPE = e.shape(e.Post, () => ({
+  public static SHALLOW_POST_SHAPE = e.shape(e.Post, () => ({
     id: true,
-    content: true,
     author: { id: true, name: true, displayName: true },
+    content: true,
     bookmarkCount: true,
     favouriteCount: true,
+    repostCount: true,
     isFavourite: true,
     isBookmarked: true,
+    isReposted: true,
     createdAt: true
+  }));
+  public static POST_SHAPE =e.shape(e.Post, (post) => ({
+    ...this.SHALLOW_POST_SHAPE(post),
+    repostOf: this.SHALLOW_POST_SHAPE
   }));
 
   public static createOne(post: InsertPostShape, currentUser: CurrentUserShape) {
