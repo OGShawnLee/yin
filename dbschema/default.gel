@@ -114,12 +114,51 @@ module default {
     property isReposted := exists (
       select Repost filter .post.id = Post.id and .user.displayName = global currentUserDisplayName
     );
+    property isQuoted := exists (
+      select Quote filter .quoteOf.id = Post.id and .user.displayName = global currentUserDisplayName
+    );
     repostOf: Post {
       on target delete delete source;
     }
     quoteOf: Post {
       on target delete allow;
     }
+  }
+
+  type Quote extending Record {
+    required user: User {
+      on target delete delete source;
+    }
+    required post: Post {
+      on target delete delete source;
+    }
+    required quoteOf: Post {
+      on target delete delete source;
+    }
+
+    trigger increment_quote_count after insert for each do (
+      update Post 
+      filter .id = __new__.quoteOf.id
+      set { quoteCount := .quoteCount + 1 } 
+    );
+
+    trigger decrement_quote_count after delete for each do (
+      update Post 
+      filter .id = __old__.quoteOf.id
+      set { quoteCount := .quoteCount - 1 } 
+    );
+
+    trigger notify_post_author after insert
+    for each
+    when (__new__.post.user.id != __new__.user.id)
+    do (
+      insert Notification {
+        from := __new__.user,
+        user := __new__.post.user,
+        post := __new__.post,
+        kind := NotificationKind.Quote
+      }
+    );
   }
 
   type Repost extending Record {

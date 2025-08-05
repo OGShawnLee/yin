@@ -13,14 +13,17 @@ export default class PostDAO {
     bookmarkCount: true,
     favouriteCount: true,
     repostCount: true,
+    quoteCount: true,
     isFavourite: true,
     isBookmarked: true,
     isReposted: true,
+    isQuoted: true,
     createdAt: true
   }));
   public static POST_SHAPE = e.shape(e.Post, (post) => ({
     ...this.SHALLOW_POST_SHAPE(post),
-    repostOf: this.SHALLOW_POST_SHAPE
+    repostOf: this.SHALLOW_POST_SHAPE,
+    quoteOf: this.SHALLOW_POST_SHAPE,
   }));
 
   public static createOne(post: InsertPostShape, currentUser: CurrentUserShape) {
@@ -35,8 +38,8 @@ export default class PostDAO {
   }
 
   public static getOne(id: string) {
-    return ErrorHandler.useAwait(() => {
-      const data = e.select(e.Post, (post) => ({
+    return ErrorHandler.useAwait(async () => {
+      const data = await e.select(e.Post, (post) => ({
         ...this.POST_SHAPE(post),
         filter_single: { id },
       })).run(getClient());
@@ -45,6 +48,12 @@ export default class PostDAO {
 
       throw new NotFoundError("Unable to find post. The post doesn't exist.");
     });
+  }
+
+  public static getOneReference(id: string) {
+    return e.select(e.Post, () => ({
+      filter_single: { id },
+    }));
   }
 
   public static getAll(currentUser: CurrentUserShape | null) {

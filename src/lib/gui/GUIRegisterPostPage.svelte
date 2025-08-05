@@ -1,8 +1,9 @@
 <script lang="ts">
-	import PostSchema, { type InsertPostShape } from '@business/schema/PostSchema';
+	import PostSchema, { type InsertPostShape, type PostShape } from '@business/schema/PostSchema';
 	import type { CurrentUserShape } from '@business/schema/AuthSchema';
 	import type { SuperValidated } from 'sveltekit-superforms';
-	import GUIInput from './GUIInput.svelte';
+	import GUICardQuoteOf from '@gui/component/GUICardQuoteOf.svelte';
+	import GUIInput from '@gui/GUIInput.svelte';
 	import GUITopHeader from '@gui/component/GUITopHeader.svelte';
 	import GUIUserHeader from '@gui/component/GUIUserHeader.svelte';
 	import { superForm } from 'sveltekit-superforms';
@@ -11,6 +12,7 @@
 
 	export let data: SuperValidated<InsertPostShape>;
 	export let currentUser: CurrentUserShape;
+	export let quoteOf: PostShape | null = null;
 
 	const form = superForm(data, {
 		validators: valibotClient(PostSchema.INSERT_POST_SCHEMA)
@@ -41,6 +43,7 @@
 		</GUITopHeader>
 		<section class="py-4 px-8 grid gap-4 border-b-2 border-inactive">
 			<GUIUserHeader displayName={currentUser.displayName} name={currentUser.name} link={false} />
+			<GUICardQuoteOf quoteOf={quoteOf} link={false} />
 			<GUIInput
 				{form}
 				name="content"

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { PostShape } from '@business/schema/PostSchema';
+	import GUICardQuoteOf from '@gui/component/GUICardQuoteOf.svelte';
 	import GUIDateTime from '@gui/component/GUIDateTime.svelte';
 	import GUIUserHeader from '@gui/component/GUIUserHeader.svelte';
-	import { BookmarkSimple, Heart, Recycle } from 'phosphor-svelte';
+	import { BookmarkSimple, Heart, Quotes, Recycle } from 'phosphor-svelte';
 	import { enhance } from '$app/forms';
 
 	export let post: PostShape;
@@ -25,6 +26,7 @@
 	<div class="grid gap-4 py-4 px-8 border-b-2 border-neutral-900">
 		<slot />
 		<GUIUserHeader name={post.user.name} displayName={post.user.displayName} />
+		<GUICardQuoteOf quoteOf={post.quoteOf} />
 		{#if post.content}
 			<p class="leading-normal whitespace-pre-line">{post.content}</p>
 		{/if}
@@ -55,7 +57,11 @@
 					class="flex items-center gap-2 text-xs hover:cursor-pointer"
 					aria-label="Like Post"
 				>
-					<Heart class={post.isFavourite ? 'text-danger' : 'text-current'} size={16} weight={post.isFavourite ? 'fill' : 'regular'} />
+					<Heart
+						class={post.isFavourite ? 'text-danger' : 'text-current'}
+						size={16}
+						weight={post.isFavourite ? 'fill' : 'regular'}
+					/>
 					{#if post.favouriteCount > 0}
 						<p class="text-white font-black">
 							{post.favouriteCount}
@@ -70,7 +76,11 @@
 					class="flex items-center gap-2 text-xs hover:cursor-pointer"
 					aria-label="Repost"
 				>
-					<Recycle class={post.isReposted ? 'text-main' : 'text-current'} size={16} weight={post.isReposted ? 'fill' : 'regular'} />
+					<Recycle
+						class={post.isReposted ? 'text-main' : 'text-current'}
+						size={16}
+						weight={post.isReposted ? 'fill' : 'regular'}
+					/>
 					{#if post.repostCount > 0}
 						<p class="text-white font-black">
 							{post.repostCount}
@@ -79,6 +89,23 @@
 					<p class="text-common">Repost</p>
 				</button>
 			</form>
+			<a
+				class="flex items-center gap-2 text-xs hover:cursor-pointer"
+				href="/post/{post.id}/compose"
+				aria-label="Quote"
+			>
+				<Quotes
+					class={post.isQuoted ? 'text-teal-500' : 'text-current'}
+					size={16}
+					weight={post.isQuoted ? 'fill' : 'regular'}
+				/>
+				{#if post.quoteCount > 0}
+					<p class="text-white font-black">
+						{post.quoteCount}
+					</p>
+				{/if}
+				<p class="text-common">Quote</p>
+			</a>
 		</div>
 	</div>
 {/if}

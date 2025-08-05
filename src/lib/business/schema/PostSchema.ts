@@ -31,14 +31,20 @@ export default class PostSchema {
       number("Repost count must be a number."),
       integer("Repost count must be an integer."),
     ),
+    quoteCount: pipe(
+      number("Quote count must be a number."),
+      integer("Quote count must be an integer."),
+    ),
     isFavourite: boolean("Property isFavourite must be a boolean."),
     isBookmarked: boolean("Property isBookmarked must be a boolean."),
     isReposted: boolean("Property isReposted must be a boolean."),
+    isQuoted: boolean("Property isQuoted must be a boolean."),
     createdAt: Schema.CREATED_AT_SCHEMA,
   });
   public static POST_SCHEMA = object({
     ...this.SHALLOW_POST_SCHEMA.entries,
     repostOf: nullable(this.SHALLOW_POST_SCHEMA),
+    quoteOf: nullable(this.SHALLOW_POST_SCHEMA),
   });
 
   public static getValidPost(data: unknown): PostShape {

@@ -45,6 +45,12 @@ export class UserDAO {
     })
   }
 
+  public static getOneReference(displayName: string) {
+    return e.select(e.User, () => ({
+      filter_single: { displayName },
+    }));
+  }
+
   public static updateOne(displayName: string, data: UpdateUserShape) {
     return ErrorHandler.useAwait(() => {
       return e.update(e.User, () => ({
