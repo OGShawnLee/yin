@@ -1,5 +1,5 @@
 module default {
-  scalar type NotificationKind extending enum<Favourite, Follow, Repost>;
+  scalar type NotificationKind extending enum<Favourite, Follow, Repost, Quote>;
 
   global currentUserDisplayName: str;
 
@@ -78,7 +78,7 @@ module default {
   }
 
   type Post extending Record {
-    required author: User {
+    required user: User {
       on target delete delete source;
     }
     content: str {
@@ -94,6 +94,10 @@ module default {
       default := 0;
     }
     required repostCount: int32 {
+      rewrite insert using(0);
+      default := 0;
+    }
+    required quoteCount: int32 {
       rewrite insert using(0);
       default := 0;
     }
@@ -113,6 +117,9 @@ module default {
     repostOf: Post {
       on target delete delete source;
     }
+    quoteOf: Post {
+      on target delete allow;
+    }
   }
 
   type Repost extending Record {
@@ -125,7 +132,7 @@ module default {
 
     trigger create_repost_post after insert for each do (
       insert Post {
-        author := __new__.user,
+        user := __new__.user,
         content := __new__.post.content,
         repostOf := __new__.post
       }
@@ -145,11 +152,11 @@ module default {
 
     trigger notify_post_author after insert 
     for each
-    when (__new__.post.author.id != __new__.user.id) 
+    when (__new__.post.user.id != __new__.user.id) 
     do (
       insert Notification {
         from := __new__.user,
-        user := __new__.post.author,
+        user := __new__.post.user,
         post := __new__.post,
         kind := NotificationKind.Repost
       }
@@ -182,11 +189,11 @@ module default {
 
     trigger notify_post_author after insert 
     for each
-    when (__new__.post.author.id != __new__.user.id) 
+    when (__new__.post.user.id != __new__.user.id) 
     do (
       insert Notification {
         from := __new__.user,
-        user := __new__.post.author,
+        user := __new__.post.user,
         post := __new__.post,
         kind := NotificationKind.Favourite
       }

@@ -17,7 +17,7 @@ export default class PostSchema {
   });
   public static SHALLOW_POST_SCHEMA = object({
     id: Schema.ID_SCHEMA,
-    author: AuthSchema.CURRENT_USER_SCHEMA,
+    user: AuthSchema.CURRENT_USER_SCHEMA,
     content: nullable(this.INSERT_POST_SCHEMA.entries.content),
     bookmarkCount: pipe(
       number("Bookmark count must be a number."),

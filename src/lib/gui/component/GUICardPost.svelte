@@ -13,9 +13,9 @@
 		<span class="flex items-center gap-2 text-xs">
 			<Recycle class="text-current" size={16} weight="fill" />
 			<p>
-				<a class="text-white font-bold" href="/{post.author.displayName}">
-					{post.author.name}
-					<span class="text-side">(@{post.author.displayName})</span>
+				<a class="text-white font-bold" href="/{post.user.displayName}">
+					{post.user.name}
+					<span class="text-side">(@{post.user.displayName})</span>
 				</a>
 				reposted.
 			</p>
@@ -24,7 +24,7 @@
 {:else}
 	<div class="grid gap-4 py-4 px-8 border-b-2 border-neutral-900">
 		<slot />
-		<GUIUserHeader name={post.author.name} displayName={post.author.displayName} />
+		<GUIUserHeader name={post.user.name} displayName={post.user.displayName} />
 		{#if post.content}
 			<p class="leading-normal whitespace-pre-line">{post.content}</p>
 		{/if}

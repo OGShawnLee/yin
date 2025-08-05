@@ -8,7 +8,7 @@ import { getClient } from "@db/DBClient";
 export default class PostDAO {
   public static SHALLOW_POST_SHAPE = e.shape(e.Post, () => ({
     id: true,
-    author: { id: true, name: true, displayName: true },
+    user: { id: true, name: true, displayName: true },
     content: true,
     bookmarkCount: true,
     favouriteCount: true,
@@ -18,7 +18,7 @@ export default class PostDAO {
     isReposted: true,
     createdAt: true
   }));
-  public static POST_SHAPE =e.shape(e.Post, (post) => ({
+  public static POST_SHAPE = e.shape(e.Post, (post) => ({
     ...this.SHALLOW_POST_SHAPE(post),
     repostOf: this.SHALLOW_POST_SHAPE
   }));
@@ -27,7 +27,7 @@ export default class PostDAO {
     return ErrorHandler.useAwait(() => {
       return e.insert(e.Post, {
         content: post.content,
-        author: e.select(e.User, () => ({
+        user: e.select(e.User, () => ({
           filter_single: { displayName: currentUser.displayName }
         }))
       }).run(getClient());
@@ -67,7 +67,7 @@ export default class PostDAO {
             filter_single: e.op(
               e.op(follow.follower.displayName, '=', currentUser.displayName),
               "and",
-              e.op(follow.followee.displayName, '=', post.author.displayName)
+              e.op(follow.followee.displayName, '=', post.user.displayName)
             ),
           }))
         ),
@@ -80,7 +80,7 @@ export default class PostDAO {
       return e.select(e.Post, (post) => ({
         ...this.POST_SHAPE(post),
         order_by: { expression: post.createdAt, direction: e.DESC },
-        filter: e.op(post.author.displayName, '=', displayName)
+        filter: e.op(post.user.displayName, '=', displayName)
       })).run(getClient(currentUser));
     })
   }
