@@ -31,7 +31,7 @@
 			<p class="leading-normal whitespace-pre-line">{post.content}</p>
 		{/if}
 		<GUIDateTime createdAt={post.createdAt} />
-		<div class="flex items-center gap-4">
+		<div class="flex items-center justify-between">
 			<form action="/post/{post.id}?/handle-bookmark" method="post" use:enhance>
 				<button
 					type="submit"
@@ -48,7 +48,7 @@
 							{post.bookmarkCount}
 						</p>
 					{/if}
-					<p class="text-common">Bookmark Post</p>
+					<p class="hidden sm:block text-common">Bookmark Post</p>
 				</button>
 			</form>
 			<form action="/post/{post.id}?/handle-favourite" method="post" use:enhance>
@@ -67,7 +67,7 @@
 							{post.favouriteCount}
 						</p>
 					{/if}
-					<p class="text-common">Like Post</p>
+					<p class="hidden sm:block text-common">Like Post</p>
 				</button>
 			</form>
 			<form action="/post/{post.id}?/create-repost" method="post" use:enhance>
