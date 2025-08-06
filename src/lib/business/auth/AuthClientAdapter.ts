@@ -14,7 +14,7 @@ export default class AuthClientAdapter extends YinAuthAdapter<CurrentUserShape, 
   }
 
   public getRenewedPayload(payload: CurrentUserShape): CurrentUserShape {
-    return { id: payload.id, name: payload.name, displayName: payload.displayName };
+    return { id: payload.id, name: payload.name, displayName: payload.displayName, isPro: payload.isPro };
   }
 
   public isPayload(payload: unknown): payload is CurrentUserShape {

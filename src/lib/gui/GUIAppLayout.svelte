@@ -1,4 +1,5 @@
 <script lang="ts">
+	import GUIBadge from '@gui/component/GUIBadge.svelte';
 	import { Bell, Bookmarks, House, Pen, User } from 'phosphor-svelte';
 	import { CurrentUserState } from '@gui/State';
 	import { SignOut } from 'phosphor-svelte';
@@ -57,7 +58,12 @@
 						{getNameInitials($currentUser.name)}
 					</div>
 					<div>
-						<p class="text-lg text-white font-medium">{$currentUser.name}</p>
+						<div class="flex items-center gap-2">
+							<p class="text-lg text-white font-medium">{$currentUser.name}</p>
+							{#if $currentUser.isPro}
+								<GUIBadge kind="Pro" small />
+							{/if}
+						</div>
 						<p class="text-neutral-400">@{$currentUser.displayName}</p>
 					</div>
 				</div>

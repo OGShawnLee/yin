@@ -12,7 +12,7 @@ export default class NotificationSchema {
     post: nullable(
       object({ id: Schema.ID_SCHEMA })
     ),
-    kind: picklist(["Favourite", "Follow", "Repost"], "Kind must be a valid notification kind."),
+    kind: picklist(["Favourite", "Follow", "Repost", "Quote"], "Kind must be a valid notification kind."),
     from: AuthSchema.CURRENT_USER_SCHEMA,
     createdAt: Schema.CREATED_AT_SCHEMA,
   });

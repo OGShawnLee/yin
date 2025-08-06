@@ -25,7 +25,7 @@
 {:else}
 	<div class="grid gap-4 py-4 px-8 border-b-2 border-neutral-900">
 		<slot />
-		<GUIUserHeader name={post.user.name} displayName={post.user.displayName} />
+		<GUIUserHeader user={post.user} />
 		<GUICardQuoteOf quoteOf={post.quoteOf} />
 		{#if post.content}
 			<p class="leading-normal whitespace-pre-line">{post.content}</p>

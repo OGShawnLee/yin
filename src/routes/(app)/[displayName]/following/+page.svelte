@@ -8,6 +8,7 @@
 <GUIFollowLayout profile={data.profile} route="Following">
 	{#each data.followingList as follow (follow.id)}
 		<GUIProfileCard
+			id={follow.followee.id}
 			name={follow.followee.name}
 			displayName={follow.followee.displayName}
 			description={follow.followee.description}

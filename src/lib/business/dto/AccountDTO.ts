@@ -7,6 +7,7 @@ export default class AccountDTO implements Account {
   public readonly id: string;
   public readonly name: string;
   public readonly displayName: string;
+  public readonly isPro: boolean;
   public readonly password: string;
   public readonly email: string;
   public readonly refreshTokenVersion: number;
@@ -17,6 +18,7 @@ export default class AccountDTO implements Account {
     this.id = validated.id;
     this.name = validated.name;
     this.displayName = validated.displayName;
+    this.isPro = validated.isPro;
     this.password = validated.password;
     this.email = validated.email;
     this.refreshTokenVersion = validated.refreshTokenVersion;
@@ -27,7 +29,8 @@ export default class AccountDTO implements Account {
     return {
       id: this.id,
       name: this.name,
-      displayName: this.displayName
+      displayName: this.displayName,
+      isPro: this.isPro
     };
   }
 

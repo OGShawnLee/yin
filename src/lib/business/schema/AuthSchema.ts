@@ -12,6 +12,7 @@ export default class AuthSchema {
     id: AccountSchema.ACCOUNT_SCHEMA.entries.id,
     name: UserSchema.NAME_SCHEMA,
     displayName: AccountSchema.ACCOUNT_SCHEMA.entries.displayName,
+    isPro: UserSchema.USER_SCHEMA.entries.isPro
   });
 
   public static SIGN_IN_SCHEMA = object({

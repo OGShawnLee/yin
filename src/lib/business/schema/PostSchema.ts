@@ -4,6 +4,7 @@ import AuthSchema from "@business/schema/AuthSchema";
 import { boolean, integer, maxLength, minLength, nullable, number, object, parse, pipe, string, trim } from "valibot";
 
 export type PostShape = InferOutput<typeof PostSchema.POST_SCHEMA>
+export type ShallowPostShape = InferOutput<typeof PostSchema.SHALLOW_POST_SCHEMA>
 export type InsertPostShape = InferOutput<typeof PostSchema.INSERT_POST_SCHEMA>
 
 export default class PostSchema {
@@ -15,10 +16,19 @@ export default class PostSchema {
       maxLength(512, "Content must be at most 512 characters long."),
     ),
   });
+  public static PRO_INSERT_POST_SCHEMA = object({
+    content: pipe(
+      string("Content must be a string."),
+      trim(),
+      minLength(16, "Content must be at least 16 characters long."),
+      maxLength(1024, "Content must be at most 1024 characters long."),
+    ),
+  });
+      
   public static SHALLOW_POST_SCHEMA = object({
     id: Schema.ID_SCHEMA,
     user: AuthSchema.CURRENT_USER_SCHEMA,
-    content: nullable(this.INSERT_POST_SCHEMA.entries.content),
+    content: nullable(this.PRO_INSERT_POST_SCHEMA.entries.content),
     bookmarkCount: pipe(
       number("Bookmark count must be a number."),
       integer("Bookmark count must be an integer."),

@@ -31,7 +31,7 @@
 		</svelte:fragment>
 	</GUITopHeader>
 	<section class="py-4 px-8 grid gap-4 border-b-2 border-neutral-900">
-		<GUIUserHeader name={data.profile.name} displayName={data.profile.displayName} />
+		<GUIUserHeader user={data.profile} badge={false} />
 		<GUIBadgeList
 			isFounder={data.profile.isFounder}
 			isPro={data.profile.isPro}

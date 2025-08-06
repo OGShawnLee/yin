@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { PostShape } from '@business/schema/PostSchema';
+	import type { ShallowPostShape } from '@business/schema/PostSchema';
 	import GUIDateTime from '@gui/component/GUIDateTime.svelte';
 	import GUIUserHeader from '@gui/component/GUIUserHeader.svelte';
 	import { Quotes } from 'phosphor-svelte';
 
-	export let quoteOf: PostShape | null;
+	export let quoteOf: ShallowPostShape | null;
 	export let link = true;
 </script>
 
@@ -31,11 +31,7 @@
 	{#if link}
 		<a href="/post/{quoteOf.id}">
 			<div class="grid gap-4 py-4 px-8 bg-input border border-inactive rounded-md">
-				<GUIUserHeader
-					name={quoteOf.user.name}
-					displayName={quoteOf.user.displayName}
-					link={false}
-				/>
+				<GUIUserHeader user={quoteOf.user} link={false} />
 				{#if quoteOf.content}
 					<p class="leading-normal whitespace-pre-line">{quoteOf.content}</p>
 				{/if}
@@ -44,7 +40,7 @@
 		</a>
 	{:else}
 		<div class="grid gap-4 py-4 px-8 bg-input border border-inactive rounded-md">
-			<GUIUserHeader name={quoteOf.user.name} displayName={quoteOf.user.displayName} link={false} />
+			<GUIUserHeader user={quoteOf.user} link={false} />
 			{#if quoteOf.content}
 				<p class="leading-normal whitespace-pre-line">{quoteOf.content}</p>
 			{/if}

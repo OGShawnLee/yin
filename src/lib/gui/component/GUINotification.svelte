@@ -1,14 +1,15 @@
 <script lang="ts">
 	import type { NotificationShape } from '@business/schema/NotificationSchema';
 	import GUIDateTime from '@gui/component/GUIDateTime.svelte';
-	import { Heart, Recycle, UserPlus } from 'phosphor-svelte';
+	import { Heart, Recycle, Quotes, UserPlus } from 'phosphor-svelte';
 
 	export let notification: NotificationShape;
 
 	const NOTIFICATION_KIND_ICONS = {
 		Favourite: Heart,
 		Follow: UserPlus,
-		Repost: Recycle
+		Repost: Recycle,
+		Quote: Quotes
 	};	
 </script>
 

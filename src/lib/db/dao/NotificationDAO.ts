@@ -12,7 +12,7 @@ export default class NotificationDAO {
         isRead: true,
         kind: true,
         post: { id: true },
-        from: { id: true, displayName: true, name: true },
+        from: { id: true, displayName: true, name: true, isPro: true },
         createdAt: true,
         filter: e.op(notification.user.displayName, "=", currentUser.displayName),
         order_by: { expression: notification.createdAt, direction: e.DESC },

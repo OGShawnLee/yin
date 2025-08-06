@@ -24,6 +24,7 @@ export default class AccountSchema {
       minLength(3, "Email must be at least 3 characters long."),
       maxLength(128, "Email must be at most 128 characters long")
     ),
+    isPro: UserSchema.USER_SCHEMA.entries.isPro,
     refreshTokenVersion: pipe(
       number('Versión de Token de Actualización debe ser un número.'),
       integer('Versión de Token de Actualización debe ser un número entero.')

@@ -1,6 +1,6 @@
 import Schema from "$lib/business/schema/Schema";
 import type { InferOutput } from "valibot";
-import { maxLength, minLength, nullish, object, parse, pipe, regex, string, trim } from "valibot";
+import { boolean, maxLength, minLength, nullish, object, parse, pipe, regex, string, trim } from "valibot";
 
 export type UserShape = InferOutput<typeof UserSchema.USER_SCHEMA>
 export type UpdateUserShape = InferOutput<typeof UserSchema.UPDATE_USER_SCHEMA>;
@@ -46,6 +46,7 @@ export default class UserSchema {
     name: this.NAME_SCHEMA,
     location: this.UPDATE_USER_SCHEMA.entries.location,
     description: this.UPDATE_USER_SCHEMA.entries.description,
+    isPro: boolean("Property isPro must be a boolean."),
     createdAt: Schema.CREATED_AT_SCHEMA,
   });
 

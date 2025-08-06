@@ -1,5 +1,8 @@
 <script lang="ts">
-	import PostSchema, { type InsertPostShape, type PostShape } from '@business/schema/PostSchema';
+	import PostSchema, {
+		type InsertPostShape,
+		type ShallowPostShape
+	} from '@business/schema/PostSchema';
 	import type { CurrentUserShape } from '@business/schema/AuthSchema';
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import GUICardQuoteOf from '@gui/component/GUICardQuoteOf.svelte';
@@ -12,10 +15,12 @@
 
 	export let data: SuperValidated<InsertPostShape>;
 	export let currentUser: CurrentUserShape;
-	export let quoteOf: PostShape | null = null;
+	export let quoteOf: ShallowPostShape | null = null;
 
 	const form = superForm(data, {
-		validators: valibotClient(PostSchema.INSERT_POST_SCHEMA)
+		validators: valibotClient(
+			currentUser.isPro ? PostSchema.PRO_INSERT_POST_SCHEMA : PostSchema.INSERT_POST_SCHEMA
+		)
 	});
 	const { form: input, enhance } = form;
 </script>
@@ -24,7 +29,7 @@
 	<title>Create Post - Yin</title>
 </svelte:head>
 
-<main class="my-20 ">
+<main class="my-20">
 	<form method="post" use:enhance>
 		<GUITopHeader
 			title="Compose"
@@ -42,8 +47,8 @@
 			</button>
 		</GUITopHeader>
 		<section class="py-4 px-8 grid gap-4 border-b-2 border-inactive">
-			<GUIUserHeader displayName={currentUser.displayName} name={currentUser.name} link={false} />
-			<GUICardQuoteOf quoteOf={quoteOf} link={false} />
+			<GUIUserHeader user={currentUser} link={false} />
+			<GUICardQuoteOf {quoteOf} link={false} />
 			<GUIInput
 				{form}
 				name="content"

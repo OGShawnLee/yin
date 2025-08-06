@@ -8,7 +8,7 @@ import { getClient } from "@db/DBClient";
 export default class PostDAO {
   public static SHALLOW_POST_SHAPE = e.shape(e.Post, () => ({
     id: true,
-    user: { id: true, name: true, displayName: true },
+    user: { id: true, name: true, displayName: true, isPro: true },
     content: true,
     bookmarkCount: true,
     favouriteCount: true,

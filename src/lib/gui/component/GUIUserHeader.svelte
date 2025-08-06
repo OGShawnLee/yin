@@ -1,19 +1,26 @@
 <script lang="ts">
-	export let name: string;
-	export let displayName: string;
+	import type { CurrentUserShape } from "@business/schema/AuthSchema";
+	import GUIBadge from "@gui/component/GUIBadge.svelte"
+
+	export let user: CurrentUserShape;
 	export let link = true;
+	export let badge = true;
 </script>
 
 <div class="grid">
-	<p class="text-lg text-white font-bold leading-tight">{name}</p>
-
+	<div class="flex items-center gap-2">
+		<p class="text-lg text-white font-bold leading-tight">{user.name}</p>
+		{#if user.isPro && badge}
+			<GUIBadge kind="Pro" small />
+		{/if}
+	</div>
 	{#if link}
-		<a class="text-xs text-side font-bold leading-tight" href="/{displayName}">
-			@{displayName}
+		<a class="w-fit text-xs text-side font-bold leading-tight" href="/{user.displayName}">
+			@{user.displayName}
 		</a>
 	{:else}
 		<p class="text-xs text-side font-bold leading-tight">
-			@{displayName}
+			@{user.displayName}
 		</p>
 	{/if}
 </div>
