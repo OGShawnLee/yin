@@ -6,6 +6,7 @@ import ErrorHandler from "@common/ErrorHandler";
 import NotFoundError from "@db/NotFoundError";
 import e from "@db:qb";
 import { getClient } from "@db/DBClient";
+import { SearchUser } from "@db/queries/queries";
 
 export class UserDAO {
   public static createOne(credentials: SignUpShape) {
@@ -65,6 +66,12 @@ export class UserDAO {
       return e.delete(e.User, () => ({
         filter_single: { displayName }
       })).run(getClient());
+    });
+  }
+
+  public static searchMany(query: string, currentUser: CurrentUserShape | null) {
+    return ErrorHandler.useAwait(async () => {
+      return SearchUser(getClient(currentUser), { query });
     });
   }
 }

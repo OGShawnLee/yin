@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "pnpm generate && vite build",
+		"build": "pnpm gen && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -16,7 +16,8 @@
 		"test": "npm run test:unit -- --run && npm run test:e2e",
 		"test:e2e": "playwright test",
 		"migrate": "gel migration create && gel migration apply",
-		"generate": "npx @gel/generate edgeql-js --output-dir src/lib/db/edgeql-js"
+		"gen:queries": "npx @gel/generate queries --file src/lib/db/queries/queries",
+		"gen": "npx @gel/generate edgeql-js --output-dir src/lib/db/edgeql-js && pnpm gen:queries"
 	},
 	"devDependencies": {
 		"@gel/generate": "^0.6.4",

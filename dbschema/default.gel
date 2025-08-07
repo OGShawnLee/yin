@@ -75,6 +75,24 @@ module default {
         select Follow filter .follower.displayName = global currentUserDisplayName and .followee.id = User.id
       )
     );
+
+    index fts::index on ((
+      fts::with_options(
+        .displayName,
+        language := fts::Language.eng,
+        weight_category := fts::Weight.A
+      ),
+      fts::with_options(
+        .name,
+        language := fts::Language.eng,
+        weight_category := fts::Weight.B
+      ),
+      fts::with_options(
+        .description,
+        language := fts::Language.eng,
+        weight_category := fts::Weight.C
+      )
+    ));
   }
 
   type Post extending Record {
@@ -153,7 +171,15 @@ module default {
         post := __old__,
         previousContent := __old__.content
       }
-    )
+    );
+
+    index fts::index on ((
+      fts::with_options(
+        .content,
+        language := fts::Language.spa,
+        weight_category := fts::Weight.A
+      )
+    ));
   }
 
   type Edit extending Record {

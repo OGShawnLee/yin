@@ -1,6 +1,6 @@
 <script lang="ts">
 	import GUIBadge from '@gui/component/GUIBadge.svelte';
-	import { Bell, Bookmarks, House, Pen, User } from 'phosphor-svelte';
+	import { Bell, Bookmarks, MagnifyingGlass, House, Pen, User } from 'phosphor-svelte';
 	import { CurrentUserState } from '@gui/State';
 	import { SignOut } from 'phosphor-svelte';
 	import { enhance } from '$app/forms';
@@ -22,27 +22,31 @@
 <div class="relative min-h-screen max-w-6xl w-full mx-auto | flex gap-8">
 	<nav class="hidden sticky h-full top-80px w-300px | xl:flex flex-col justify-between">
 		<div class="flex flex-col items-start gap-8">
-			<a class="font-medium hover:text-white flex items-center gap-2" href="/">
+			<a class="flex items-center gap-4 hover:text-white" href="/">
 				<House size={24} />
 				Home
 			</a>
+			<a class="flex items-center gap-4 hover:text-white" href="/search">
+				<MagnifyingGlass size={24} />
+				Search
+			</a>
 			{#if $currentUser}
 				<a
-					class="font-medium hover:text-white flex items-center gap-2"
+					class="flex items-center gap-4 hover:text-white"
 					href="/{$currentUser.displayName}"
 				>
 					<User size={24} />
 					Profile
 				</a>
-				<a class="font-medium hover:text-white flex items-center gap-2" href="/notifications">
+				<a class="flex items-center gap-4 hover:text-white" href="/notifications">
 					<Bell size={24} />
 					Notifications
 				</a>
-				<a class="font-medium hover:text-white flex items-center gap-2" href="/bookmarks">
+				<a class="flex items-center gap-4 hover:text-white" href="/bookmarks">
 					<Bookmarks size={24} />
 					Bookmarks
 				</a>
-				<a class="font-medium hover:text-white flex items-center gap-2" href="/post/compose">
+				<a class="flex items-center gap-4 hover:text-white" href="/post/compose">
 					<Pen size={24} />
 					Create Post
 				</a>

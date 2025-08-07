@@ -11,7 +11,7 @@
 	export let isStaff: boolean;
 </script>
 
-<article class="px-8 py-4 grid gap-4 border-b-2 border-inactive">
+<article class="px-8 py-4 grid gap-4 border-b border-inactive">
 	<GUIUserHeader user={{ id, name, displayName, isPro }} badge={false} />
 	<GUIBadgeList {isPro} {isFounder} {isStaff} />
 	{#if description}

@@ -20,17 +20,17 @@
 <nav
 	class="fixed bottom-0 inset-x-0 h-20 px-8 flex md:hidden items-center justify-between bg-black/70 backdrop-filter backdrop-blur-sm border-t-2 border-inactive"
 >
-	<!-- TODO: Add Search Feature -->
-	<!-- <a
+	<a
     class="size-12 min-w-12 flex items-center justify-center text-white"
     href="/search"
     aria-label="Search"
   >
     <MagnifyingGlass size={24} weight={route === 'Search' ? 'fill' : 'regular'} />
     <p class="sr-only">Search</p>
-  </a> -->
+  </a>
 	{#if $currentUser}
-		<form action="/auth/sign-out" method="post" use:enhance>
+	<!-- TODO: Add Mobile Sidebar -->
+		<!-- <form action="/auth/sign-out" method="post" use:enhance>
 			<button
 				class="size-12 min-w-12 flex items-center justify-center text-white"
 				aria-label="Sign Out"
@@ -38,7 +38,7 @@
 				<SignOut size={24} />
 				<p class="sr-only">Sign Out</p>
 			</button>
-		</form>
+		</form> -->
 		<a
 			class="size-12 min-w-12 flex items-center justify-center text-white"
 			href="/{$currentUser.displayName}"

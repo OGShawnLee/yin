@@ -4,6 +4,7 @@ import ErrorHandler from "@common/ErrorHandler";
 import NotFoundError from "@db/NotFoundError";
 import e from "@db:qb";
 import { getClient } from "@db/DBClient";
+import { SearchPost } from "@db/queries/queries";
 
 export default class PostDAO {
   public static SHALLOW_POST_SHAPE = e.shape(e.Post, () => ({
@@ -95,7 +96,13 @@ export default class PostDAO {
       })).run(getClient(currentUser));
     });
   }
-
+  
+  public static searchMany(query: string, currentUser: CurrentUserShape | null) {
+    return ErrorHandler.useAwait(async () => {
+      return SearchPost(getClient(currentUser), { query });
+    });
+  }
+  
   public static updateOne(id: string, data: InsertPostShape, currentUser: CurrentUserShape) {
     return ErrorHandler.useAwait(async () => {
       const result = await e.update(e.Post, (post) => ({
