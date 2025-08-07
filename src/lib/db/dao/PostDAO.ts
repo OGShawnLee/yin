@@ -39,12 +39,12 @@ export default class PostDAO {
     })
   }
 
-  public static getOne(id: string) {
+  public static getOne(id: string, currentUser: CurrentUserShape | null) {
     return ErrorHandler.useAwait(async () => {
       const data = await e.select(e.Post, (post) => ({
         ...this.POST_SHAPE(post),
         filter_single: { id },
-      })).run(getClient());
+      })).run(getClient(currentUser));
 
       if (data) return data;
 

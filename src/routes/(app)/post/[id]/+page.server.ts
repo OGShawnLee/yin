@@ -7,7 +7,10 @@ import NotFoundError from "@db/NotFoundError";
 import { error } from "@sveltejs/kit";
 
 export async function load(event) {
-  const { data, error: err } = await PostDAO.getOne(event.params.id);
+  const { data, error: err } = await PostDAO.getOne(
+    event.params.id,
+    await AuthClient.findAuthPayloadFromCookies(event.cookies)
+  );
 
   if (err) {
     const status = err instanceof NotFoundError ? 404 : 500;
