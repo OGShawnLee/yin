@@ -16,9 +16,9 @@
 
 <main class="py-20 md:(grid gap-4)">
 	{#if $currentUser}
-		<GUITopHeader title="Home" href="/home" subtitle="Following" subhref="/following" />
+		<GUITopHeader title="Home" href="/" subtitle="Following" subhref="/following" />
 	{:else}
-		<GUITopHeader title="Home" href="/home" />
+		<GUITopHeader title="Home" href="/" />
 	{/if}
 	<section>
 		<h2 class="sr-only">Recent Posts</h2>
