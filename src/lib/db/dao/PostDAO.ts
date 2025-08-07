@@ -18,7 +18,9 @@ export default class PostDAO {
     isBookmarked: true,
     isReposted: true,
     isQuoted: true,
-    createdAt: true
+    hasEditAvailable: true,
+    createdAt: true,
+    updatedAt: true,
   }));
   public static POST_SHAPE = e.shape(e.Post, (post) => ({
     ...this.SHALLOW_POST_SHAPE(post),
@@ -91,6 +93,23 @@ export default class PostDAO {
         order_by: { expression: post.createdAt, direction: e.DESC },
         filter: e.op(post.user.displayName, '=', displayName)
       })).run(getClient(currentUser));
-    })
+    });
+  }
+
+  public static updateOne(id: string, data: InsertPostShape, currentUser: CurrentUserShape) {
+    return ErrorHandler.useAwait(async () => {
+      const result = await e.update(e.Post, (post) => ({
+        set: { content: data.content },
+        filter_single: e.op(
+          e.op(post.id, "=", e.uuid(id)),
+          "and",
+          e.op(post.user.displayName, "=", currentUser.displayName)
+        )
+      })).run(getClient(currentUser));
+
+      if (result) return result;
+
+      throw new NotFoundError("Unable to update post. The post doesn't exist or you are not the author.");
+    });
   }
 }

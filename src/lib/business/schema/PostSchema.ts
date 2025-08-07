@@ -45,11 +45,17 @@ export default class PostSchema {
       number("Quote count must be a number."),
       integer("Quote count must be an integer."),
     ),
+    editCount: pipe(
+      number("Edit count must be a number."),
+      integer("Edit count must be an integer."),
+    ),
     isFavourite: boolean("Property isFavourite must be a boolean."),
     isBookmarked: boolean("Property isBookmarked must be a boolean."),
     isReposted: boolean("Property isReposted must be a boolean."),
     isQuoted: boolean("Property isQuoted must be a boolean."),
+    hasEditAvailable: boolean("Property hasEditAvailable must be a boolean."),
     createdAt: Schema.CREATED_AT_SCHEMA,
+    updatedAt: Schema.CREATED_AT_SCHEMA,
   });
   public static POST_SCHEMA = object({
     ...this.SHALLOW_POST_SCHEMA.entries,

@@ -3,7 +3,8 @@
 	import GUICardQuoteOf from '@gui/component/GUICardQuoteOf.svelte';
 	import GUIDateTime from '@gui/component/GUIDateTime.svelte';
 	import GUIUserHeader from '@gui/component/GUIUserHeader.svelte';
-	import { BookmarkSimple, Heart, Quotes, Recycle } from 'phosphor-svelte';
+	import { BookmarkSimple, PencilLine, Heart, Quotes, Recycle } from 'phosphor-svelte';
+	import { CurrentUserState } from '@gui/State';
 	import { enhance } from '$app/forms';
 
 	export let post: PostShape;
@@ -25,12 +26,27 @@
 {:else}
 	<div class="grid gap-4 py-4 px-8 border-b-2 border-neutral-900">
 		<slot />
-		<GUIUserHeader user={post.user} />
+		<div class="flex items-center justify-between">
+			<GUIUserHeader user={post.user} />
+			{#if post.hasEditAvailable}
+				<a
+					class="flex items-center gap-2 text-xs hover:cursor-pointer"
+					href="/post/{post.id}/compose?edit=true"
+					aria-label="Edit"
+				>
+					<PencilLine class="text-current" size={16} />
+					<p class="text-common">Edit Post</p>
+				</a>
+			{/if}
+		</div>
 		<GUICardQuoteOf quoteOf={post.quoteOf} />
 		{#if post.content}
 			<p class="leading-normal whitespace-pre-line">{post.content}</p>
 		{/if}
-		<GUIDateTime createdAt={post.createdAt} />
+		<div class="flex items-center gap-x-4 gap-y-2 flex-wrap">
+			<GUIDateTime createdAt={post.createdAt} />
+			<GUIDateTime createdAt={post.updatedAt} label="Updated" />
+		</div>
 		<div class="flex items-center justify-between">
 			<form action="/post/{post.id}?/handle-bookmark" method="post" use:enhance>
 				<button

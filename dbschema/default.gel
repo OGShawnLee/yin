@@ -101,6 +101,15 @@ module default {
       rewrite insert using(0);
       default := 0;
     }
+    required editCount: int16 {
+      rewrite insert using(0);
+      rewrite update using (
+        __subject__.editCount + 1
+        if __subject__.content != __old__.content
+        else __subject__.editCount
+      );
+      default := 0;
+    }
     property isBookmarked := (
       select exists (
         select Bookmark filter .post.id = Post.id and .user.displayName = global currentUserDisplayName
@@ -117,11 +126,46 @@ module default {
     property isQuoted := exists (
       select Quote filter .quoteOf.id = Post.id and .user.displayName = global currentUserDisplayName
     );
+    property hasEditAvailable := (
+      with date := datetime_of_statement()
+      select (date - .createdAt) < <std::duration>'72 hours' and
+      .user.displayName = global currentUserDisplayName and .editCount <= (select if .user.isPro then 5 else 3)
+    );
     repostOf: Post {
       on target delete delete source;
     }
     quoteOf: Post {
       on target delete allow;
+    }
+    updatedAt: datetime {
+      rewrite update using(
+        datetime_of_statement()
+        if __subject__.content != __old__.content
+        else __subject__.updatedAt
+      );
+    }
+
+    trigger handle_content_edit after update for each
+    when (__old__.content != __new__.content and __old__.hasEditAvailable)
+    do (
+      insert Edit {
+        user := __old__.user,
+        post := __old__,
+        previousContent := __old__.content
+      }
+    )
+  }
+
+  type Edit extending Record {
+    required user: User {
+      on target delete delete source;
+    }
+    required post: Post {
+      on target delete delete source;
+    }
+    required previousContent: str {
+      constraint min_len_value(16);
+      constraint max_len_value(1024);
     }
   }
 
