@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { PostShape } from '@business/schema/PostSchema';
 	import GUICardQuoteOf from '@gui/component/GUICardQuoteOf.svelte';
+	import GUIDialogManagePost from "@gui/component/GUIDialogManagePost.svelte"
 	import GUIDateTime from '@gui/component/GUIDateTime.svelte';
 	import GUIUserHeader from '@gui/component/GUIUserHeader.svelte';
 	import { BookmarkSimple, PencilLine, Heart, Quotes, Recycle } from 'phosphor-svelte';
-	import { CurrentUserState } from '@gui/State';
 	import { enhance } from '$app/forms';
 
 	export let post: PostShape;
@@ -28,16 +28,7 @@
 		<slot />
 		<div class="flex items-center justify-between">
 			<GUIUserHeader user={post.user} />
-			{#if post.hasEditAvailable}
-				<a
-					class="flex items-center gap-2 text-xs hover:cursor-pointer"
-					href="/post/{post.id}/compose?edit=true"
-					aria-label="Edit"
-				>
-					<PencilLine class="text-current" size={16} />
-					<p class="text-common">Edit Post</p>
-				</a>
-			{/if}
+			<GUIDialogManagePost {post} />
 		</div>
 		<GUICardQuoteOf quoteOf={post.quoteOf} />
 		{#if post.content}

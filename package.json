@@ -29,6 +29,7 @@
 		"@types/jsonwebtoken": "^9.0.10",
 		"@vitest/browser": "^3.2.3",
 		"bcrypt": "^6.0.0",
+		"bits-ui": "^2.9.2",
 		"formsnap": "^2.0.1",
 		"gel": "^2.1.1",
 		"jsonwebtoken": "^9.0.2",

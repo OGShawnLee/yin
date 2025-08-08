@@ -15,6 +15,7 @@ export default class PostDAO {
     favouriteCount: true,
     repostCount: true,
     quoteCount: true,
+    editCount: true,
     isFavourite: true,
     isBookmarked: true,
     isReposted: true,
