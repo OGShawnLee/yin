@@ -23,7 +23,7 @@
 	</div>
 	<div class="grid gap-2">
 		<p class="font-bold">
-			<a class="underline underline-offset-4" href="/{notification.from.displayName}">
+			<a href="/{notification.from.displayName}">
 				{notification.from.name}
 				<span class="text-side">
 					(@{notification.from.displayName})
@@ -31,12 +31,12 @@
 			</a>
 			{#if notification.kind === 'Favourite'}
 				liked your
-				<a class="underline underline-offset-4" href="/post/{notification.post?.id}"> Post </a>.
+				<a href="/post/{notification.post?.id}"> Post </a>.
 			{:else if notification.kind === 'Follow'}
 				started following you.
 			{:else}
 				reposted your
-				<a class="underline underline-offset-4" href="/post/{notification.post?.id}"> Post </a>.
+				<a href="/post/{notification.post?.id}"> Post </a>.
 			{/if}
 		</p>
 		<GUIDateTime createdAt={notification.createdAt} />
