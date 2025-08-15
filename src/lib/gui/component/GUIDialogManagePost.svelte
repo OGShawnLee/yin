@@ -49,7 +49,7 @@
 				</span>
 			</button>
 			{#if post.hasEditAvailable}
-				<a class="flex gap-2" href="/post/{post.id}/compose?edit=true">
+				<a class="flex gap-2" href="/post/{post.id}/compose?state=EDIT_POST">
 					<div class="size-10 min-w-10 flex items-center justify-center">
 						<PencilLine class={post.user.isPro ? 'text-pro' : 'text-main'} size={36} />
 					</div>

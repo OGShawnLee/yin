@@ -1,10 +1,7 @@
-import { YinAuthCrypto } from "$lib/YinAuth";
-import type { Account } from "$lib/business/schema/AccountSchema";
 import type { UserShape } from "@business/schema/UserSchema";
-import AccountSchema from "$lib/business/schema/AccountSchema";
 import UserSchema from "@business/schema/UserSchema";
 
-export default class UserDTO {
+export default class UserDTO implements UserShape {
   public readonly id: string;
   public readonly name: string;
   public readonly location: string | null | undefined;

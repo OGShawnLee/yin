@@ -12,14 +12,18 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 	import { Image, Notepad, PaperPlaneRight, Trash } from 'phosphor-svelte';
+	import { ComposeState } from '@business/schema/ComposeSchema';
 
-	export let data: SuperValidated<InsertPostShape>;
-	export let currentUser: CurrentUserShape;
-	export let quoteOf: ShallowPostShape | null = null;
+	export let data: {
+		form: SuperValidated<InsertPostShape>,
+		currentUser: CurrentUserShape,
+		quoteOf: ShallowPostShape | null,
+		state: ComposeState
+	}
 
-	const form = superForm(data, {
+	const form = superForm(data.form, {
 		validators: valibotClient(
-			currentUser.isPro ? PostSchema.PRO_INSERT_POST_SCHEMA : PostSchema.INSERT_POST_SCHEMA
+			data.currentUser.isPro ? PostSchema.PRO_INSERT_POST_SCHEMA : PostSchema.INSERT_POST_SCHEMA
 		)
 	});
 	const { form: input, enhance } = form;
@@ -30,7 +34,7 @@
 </svelte:head>
 
 <main class="my-20">
-	<form method="post" use:enhance>
+	<form method="post" action="?/create-post&state={data.state}" use:enhance>
 		<GUITopHeader
 			title="Compose"
 			href="/post/compose"
@@ -40,6 +44,7 @@
 			<button
 				class="size-12 min-w-12 flex items-center justify-center bg-main rounded-full text-white"
 				aria-label="Publish Post"
+				type="submit"
 				slot="button"
 			>
 				<PaperPlaneRight size={24} />
@@ -47,8 +52,8 @@
 			</button>
 		</GUITopHeader>
 		<section class="py-4 px-8 grid gap-4 border-b-2 border-inactive">
-			<GUIUserHeader user={currentUser} link={false} />
-			<GUICardQuoteOf {quoteOf} link={false} />
+			<GUIUserHeader user={data.currentUser} link={false} />
+			<GUICardQuoteOf quoteOf={data.quoteOf} link={false} />
 			<GUIInput
 				{form}
 				name="content"
@@ -75,9 +80,11 @@
 					<p class="text-side">Add Image</p>
 				</button>
 				<button
-					type="button"
-					class="flex items-center gap-1 text-xs text-side hover:cursor-pointer"
+					class="flex items-center gap-1 text-xs text-side hover:not-disabled:cursor-pointer"
 					aria-label="Save Draft"
+					type="submit"
+					formaction="?/create-draft&state={data.state}"
+					disabled={data.state === ComposeState.EDIT_POST}
 				>
 					<Notepad size={18} />
 					<p class="text-side">Save Draft</p>

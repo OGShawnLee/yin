@@ -195,6 +195,26 @@ module default {
     }
   }
 
+  type Draft extending Record {
+    required user: User {
+      on target delete delete source;
+    }
+    quoteOf: Post {
+      on target delete delete source;
+    }
+    required content: str {
+      constraint min_len_value(16);
+      constraint max_len_value(1024);
+    }
+    updatedAt: datetime {
+      rewrite update using (
+        datetime_of_statement()
+        if __subject__.content != __old__.content
+        else __subject__.updatedAt
+      )
+    }
+  }
+
   type Quote extending Record {
     required user: User {
       on target delete delete source;

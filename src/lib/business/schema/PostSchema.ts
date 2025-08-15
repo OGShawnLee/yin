@@ -53,7 +53,7 @@ export default class PostSchema {
     isBookmarked: boolean("Property isBookmarked must be a boolean."),
     isReposted: boolean("Property isReposted must be a boolean."),
     isQuoted: boolean("Property isQuoted must be a boolean."),
-    hasEditAvailable: boolean("Property hasEditAvailable must be a boolean."),
+    hasEditAvailable: nullable(boolean("Property hasEditAvailable must be a boolean.")),
     createdAt: Schema.CREATED_AT_SCHEMA,
     updatedAt: Schema.CREATED_AT_SCHEMA,
   });

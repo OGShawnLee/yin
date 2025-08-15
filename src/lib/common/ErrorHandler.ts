@@ -37,7 +37,7 @@ export default class ErrorHandler {
 
     if (error instanceof ValiError) {
       return new UserDisplayableError(
-        'The date you provided is not valid, it is not your fault. This error has been reported to the development team.',
+        'The data you provided is not valid, it is not your fault. This error has been reported to the development team.',
       );
     }
 

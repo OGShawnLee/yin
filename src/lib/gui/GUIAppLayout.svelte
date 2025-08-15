@@ -46,7 +46,7 @@
 					<Bookmarks size={24} />
 					Bookmarks
 				</a>
-				<a class="flex items-center gap-4 hover:text-white" href="/post/compose">
+				<a class="flex items-center gap-4 hover:text-white" href="/post/compose?state=CREATE">
 					<Pen size={24} />
 					Create Post
 				</a>

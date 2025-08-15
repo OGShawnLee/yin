@@ -98,7 +98,7 @@
 			</form>
 			<a
 				class="flex items-center gap-2 text-xs hover:cursor-pointer"
-				href="/post/{post.id}/compose"
+				href="/post/{post.id}/compose?state=QUOTE"
 				aria-label="Quote"
 			>
 				<Quotes
