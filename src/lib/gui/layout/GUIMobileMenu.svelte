@@ -47,7 +47,7 @@
 							<div class="p-8 grid gap-8">
 								<GUIUserHeader user={$currentUser} />
 								<nav class="grid gap-4">
-									<a class="h-12 flex items-center justify-between" href="/home">
+									<a class="h-12 flex items-center justify-between" href="/">
 										<span> Home </span>
 										<House size={24} />
 									</a>
