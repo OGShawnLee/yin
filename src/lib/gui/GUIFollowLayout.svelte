@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { CurrentUserShape } from '@business/schema/AuthSchema';
 	import GUIBottomMobileNavBar from '@gui/component/GUIBottomMobileNavBar.svelte';
+	import GUIMobileMenu from '@gui/layout/GUIMobileMenu.svelte';
 	import GUINavigationTab from '@gui/component/GUINavigationTab.svelte';
 	import GUITopHeader from '@gui/component/GUITopHeader.svelte';
 	import { format } from '$lib';
@@ -18,24 +19,24 @@
 </svelte:head>
 
 <main class="py-20">
-	<GUITopHeader title={profile.name} href="/{profile.displayName}" />
-	<div class="md:(grid gap-4)">
-		<GUINavigationTab
-			{route}
-			routes={[
-				{ label: 'Followers', href: format('/{0}/followers', profile.displayName) },
-				{ label: 'Following', href: format('/{0}/following', profile.displayName) }
-			]}
-		/>
-		<section>
-			<h2 class="sr-only">
-				{route === 'Followers' ? 'Recent Followers' : 'Recent Users Followed'}
-			</h2>
-			<ul>
-				<slot />
-			</ul>
-		</section>
-	</div>
+	<GUITopHeader title={profile.name} href="/{profile.displayName}">
+		<GUIMobileMenu slot="button" />
+	</GUITopHeader>
+	<GUINavigationTab
+		{route}
+		routes={[
+			{ label: 'Followers', href: format('/{0}/followers', profile.displayName) },
+			{ label: 'Following', href: format('/{0}/following', profile.displayName) }
+		]}
+	/>
+	<section>
+		<h2 class="sr-only">
+			{route === 'Followers' ? 'Recent Followers' : 'Recent Users Followed'}
+		</h2>
+		<ul>
+			<slot />
+		</ul>
+	</section>
 </main>
 
 <GUIBottomMobileNavBar route="None" />

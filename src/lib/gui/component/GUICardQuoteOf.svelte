@@ -30,7 +30,7 @@
 	</div>
 	{#if link}
 		<a href="/post/{quoteOf.id}">
-			<div class="grid gap-4 py-4 px-8 bg-input border border-inactive rounded-md">
+			<div class="px-8 py-6 grid gap-4 bg-input border border-inactive rounded-lg">
 				<GUIUserHeader user={quoteOf.user} link={false} />
 				{#if quoteOf.content}
 					<p class="leading-normal whitespace-pre-line">{quoteOf.content}</p>
@@ -39,7 +39,7 @@
 			</div>
 		</a>
 	{:else}
-		<div class="grid gap-4 py-4 px-8 bg-input border border-inactive rounded-md">
+		<div class="px-8 py-6 grid gap-4 bg-input border border-inactive rounded-lg">
 			<GUIUserHeader user={quoteOf.user} link={false} />
 			{#if quoteOf.content}
 				<p class="leading-normal whitespace-pre-line">{quoteOf.content}</p>

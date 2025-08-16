@@ -1,18 +1,21 @@
 <script lang="ts">
-	import type { NotificationShape } from "@business/schema/NotificationSchema";
-	import GUITopHeader from "@gui/component/GUITopHeader.svelte";
-  import GUIBottomMobileNavBar from "@gui/component/GUIBottomMobileNavBar.svelte";
-  import GUINotification from "@gui/component/GUINotification.svelte";
+	import type { NotificationShape } from '@business/schema/NotificationSchema';
+	import GUIBottomMobileNavBar from '@gui/component/GUIBottomMobileNavBar.svelte';
+	import GUIMobileMenu from '@gui/layout/GUIMobileMenu.svelte';
+	import GUINotification from '@gui/component/GUINotification.svelte';
+	import GUITopHeader from '@gui/component/GUITopHeader.svelte';
 
-  export let data: { notificationList: NotificationShape[] };
+	export let data: { notificationList: NotificationShape[] };
 </script>
 
 <svelte:head>
 	<title>Notifications - Yin</title>
 </svelte:head>
 
-<main class="py-20 md:(grid gap-4)">
-  <GUITopHeader title="Notifications" />
+<main class="py-20">
+	<GUITopHeader title="Notifications">
+		<GUIMobileMenu slot="button" />
+	</GUITopHeader>
 	<section>
 		<h2 class="sr-only">Recent Notifications</h2>
 		<ul>

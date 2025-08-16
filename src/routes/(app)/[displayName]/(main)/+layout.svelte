@@ -2,6 +2,7 @@
 	import GUIBadgeList from '@gui/component/GUIBadgeList.svelte';
 	import GUIBottomMobileNavBar from '@gui/component/GUIBottomMobileNavBar.svelte';
 	import GUIDateTime from '@gui/component/GUIDateTime.svelte';
+	import GUIMobileMenu from '@gui/layout/GUIMobileMenu.svelte';
 	import GUITopHeader from '@gui/component/GUITopHeader.svelte';
 	import GUIUserHeader from '@gui/component/GUIUserHeader.svelte';
 	import { MapPin } from 'phosphor-svelte';
@@ -12,7 +13,11 @@
 
 <main class="py-20">
 	<GUITopHeader href="/{data.profile.displayName}" title={data.profile.name}>
-		<svelte:fragment slot="button">
+		<GUIMobileMenu slot="button" />
+	</GUITopHeader>
+	<section class="p-8 grid gap-4 border-b border-inactive">
+		<div class="flex items-center justify-between">
+			<GUIUserHeader user={data.profile} badge={false} />
 			{#if data.currentUser && data.currentUser.displayName === data.profile.displayName}
 				<a
 					class="h-10 px-8 flex items-center justify-center bg-white rounded-full text-black font-bold hover:cursor-pointer"
@@ -28,10 +33,7 @@
 					</button>
 				</form>
 			{/if}
-		</svelte:fragment>
-	</GUITopHeader>
-	<section class="py-4 px-8 grid gap-4 border-b-2 border-neutral-900">
-		<GUIUserHeader user={data.profile} badge={false} />
+		</div>
 		<GUIBadgeList
 			isFounder={data.profile.isFounder}
 			isPro={data.profile.isPro}

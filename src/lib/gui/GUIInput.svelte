@@ -10,10 +10,19 @@
 		label: string;
 		'hidden-label'?: boolean;
 		field: Snippet<[ControlAttrs & { placeholder: string }]>;
+		'error-field'?: boolean;
 		placeholder: string;
 	}
 
-	const { form, name, field, placeholder, label, "hidden-label": hiddenLabel }: Properties = $props();
+	const {
+		form,
+		name,
+		field,
+		placeholder,
+		label,
+		'hidden-label': hiddenLabel,
+		'error-field': hasErrorField = true
+	}: Properties = $props();
 </script>
 
 <div class="grid gap-2">
@@ -24,6 +33,8 @@
 				{@render field({ ...props, placeholder })}
 			{/snippet}
 		</Control>
-		<FieldErrors class="text-xs text-rose-400" />
+		{#if hasErrorField}
+			<FieldErrors class="text-xs text-rose-400" />
+		{/if}
 	</Field>
 </div>

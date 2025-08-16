@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PostShape } from '@business/schema/PostSchema';
 	import GUIBottomMobileNavBar from '@gui/component/GUIBottomMobileNavBar.svelte';
+	import GUIMobileMenu from '@gui/layout/GUIMobileMenu.svelte';
 	import GUIPostCard from '@gui/component/GUICardPost.svelte';
 	import GUITopHeader from '@gui/component/GUITopHeader.svelte';
 	import { CurrentUserState } from '@gui/State';
@@ -14,9 +15,11 @@
 	<title>Home - Yin</title>
 </svelte:head>
 
-<main class="py-20 md:(grid gap-4)">
+<main class="py-20">
 	{#if $currentUser}
-		<GUITopHeader title="Home" href="/" subtitle="Following" subhref="/following" />
+		<GUITopHeader title="Home" href="/" subtitle="Following" subhref="/following">
+			<GUIMobileMenu slot="button" />
+		</GUITopHeader>
 	{:else}
 		<GUITopHeader title="Home" href="/" />
 	{/if}

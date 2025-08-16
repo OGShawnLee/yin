@@ -21,7 +21,7 @@
 	<title>Drafts - Yin</title>
 </svelte:head>
 
-<main class="py-20 md:(grid gap-4)">
+<main class="py-20">
 		<GUITopHeader title="Drafts" href="/compose/drafts" subtitle="Compose" subhref="/post/compose?state=CREATE" />
 	<section>
 		<h2 class="sr-only">Recent Drafts</h2>

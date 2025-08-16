@@ -1,14 +1,14 @@
 <script lang="ts">
+	import type { SearchPostReturns, SearchUserReturns } from '@db/queries/queries';
 	import SearchSchema, { type SearchSchemaShape } from '@business/schema/SearchSchema';
 	import GUIBottomMobileNavBar from '@gui/component/GUIBottomMobileNavBar.svelte';
 	import GUICardPost from '@gui/component/GUICardPost.svelte';
 	import GUIInput from '@gui/GUIInput.svelte';
 	import GUIProfileCard from '@gui/GUIProfileCard.svelte';
 	import GUITopHeader from '@gui/component/GUITopHeader.svelte';
+	import GUIMobileMenu from '@gui/layout/GUIMobileMenu.svelte';
 	import { superForm, type SuperValidated } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
-	import type { PostShape } from '@business/schema/PostSchema';
-	import type { SearchPostReturns, SearchUserReturns } from '@db/queries/queries';
 
 	export let form: SuperValidated<SearchSchemaShape>;
 	export let postList: SearchPostReturns;
@@ -33,12 +33,14 @@
 				label="Search Query"
 				placeholder="What are you looking for?"
 				hidden-label
+				error-field={false}
 			>
 				{#snippet field(props)}
 					<input type="text" class="input w-full" {...props} required />
 				{/snippet}
 			</GUIInput>
 		</form>
+		<GUIMobileMenu slot="button" />
 	</GUITopHeader>
 	{#if userList.length > 0}
 		<section>

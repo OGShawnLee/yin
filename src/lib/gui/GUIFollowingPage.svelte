@@ -11,7 +11,7 @@
 	<title>Following - Yin</title>
 </svelte:head>
 
-<main class="py-20 md:(grid gap-4)">
+<main class="py-20">
   <GUITopHeader title="Following" href="/following" subtitle="Home" subhref="/" />
 	<section>
 		<h2 class="sr-only">Recent Posts</h2>

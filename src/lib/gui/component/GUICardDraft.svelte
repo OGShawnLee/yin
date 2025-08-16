@@ -17,7 +17,7 @@
 	};
 </script>
 
-<div class="grid gap-4 py-4 px-8 border-b border-inactive">
+<div class="grid gap-4 p-8 border-b border-inactive">
 	<GUIUserHeader user={draft.user} />
 	<p class="leading-normal whitespace-pre-line">{draft.content}</p>
 	<GUICardQuoteOf quoteOf={draft.quoteOf} />
