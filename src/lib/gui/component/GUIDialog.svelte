@@ -19,13 +19,14 @@
 		{/snippet}
 	</Dialog.Overlay>
 	<div
-		class="fixed top-1/2 inset-x-0 z-90 transform -translate-y-1/2 px-8 flex items-center justify-center"
+		class="fixed bottom-0 inset-x-0 z-90 flex items-center justify-center sm:(bottom-initial top-1/2 transform -translate-y-1/2 px-8)"
 	>
+		<!-- class="fixed top-1/2 inset-x-0 z-90 transform -translate-y-1/2 px-8 flex items-center justify-center" -->
 		<Dialog.Content forceMount>
 			{#snippet child(context)}
 				{#if context.open}
 					<div
-						class="max-w-md w-full border-2 border-inactive rounded-2xl bg-black"
+						class="max-w-md w-full sm:border-2 border-inactive rounded-2xl bg-input sm:bg-black"
 						{...context.props}
 						transition:fly={{ y: 120, duration: 300 }}
 					>

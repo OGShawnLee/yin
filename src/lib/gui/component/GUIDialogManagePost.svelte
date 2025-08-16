@@ -104,7 +104,7 @@
 					</span>
 				</span>
 			</button>
-			<button class="button--side w-full" slot="footer"> Close </button>
+			<Dialog.Close class="button--side w-full" slot="footer">Close</Dialog.Close>
 		</GUIDialog>
 	</Dialog.Root>
 {/if}
