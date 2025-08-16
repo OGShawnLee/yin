@@ -18,6 +18,24 @@ export default class DraftDAO {
     });
   }
 
+  public static getAll(currentUser: CurrentUserShape) {
+    return ErrorHandler.useAwait(() => {
+      return e.select(e.Draft, (draft) => ({
+        id: true,
+        user: { id: true, name: true, displayName: true, isPro: true },
+        content: true,
+        quoteOf: PostDAO.SHALLOW_POST_SHAPE(draft.quoteOf),
+        createdAt: true,
+        updatedAt: true,
+        filter: e.op(draft.user.displayName, "=", currentUser.displayName),
+        order_by: {
+          expression: draft.createdAt,
+          direction: e.DESC
+        }
+      })).run(getClient(currentUser));
+    });
+  }
+
   public static getOne(id: string, currentUser: CurrentUserShape) {
     return ErrorHandler.useAwait(async () => {
       const draft = await e.select(e.Draft, (draft) => ({
@@ -69,6 +87,18 @@ export default class DraftDAO {
         content: updated.content,
         quoteOf: updated.quoteOf,
       }).run(getClient(currentUser));
+    });
+  }
+
+  public static deleteOne(id: string, currentUser: CurrentUserShape) {
+    return ErrorHandler.useAwait(() => {
+      return e.delete(e.Draft, (draft) => ({
+        filter_single: e.op(
+          e.op(draft.id, "=", e.uuid(id)),
+          "and",
+          e.op(draft.user.displayName, "=", currentUser.displayName)
+        )
+      })).run(getClient(currentUser));
     });
   }
 }
