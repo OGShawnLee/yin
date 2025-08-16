@@ -10,10 +10,10 @@
 		Follow: UserPlus,
 		Repost: Recycle,
 		Quote: Quotes
-	};	
+	};
 </script>
 
-<div class="px-8 py-4 flex items-start gap-2 border-b border-inactive text-white">
+<div class="p-8 flex items-start gap-2 border-b border-inactive text-white">
 	<div class="size-10 min-w-10 flex items-center justify-center">
 		<svelte:component
 			this={NOTIFICATION_KIND_ICONS[notification.kind]}
@@ -21,9 +21,9 @@
 			size={28}
 		/>
 	</div>
-	<div class="grid gap-2">
-		<p class="font-bold">
-			<a href="/{notification.from.displayName}">
+	<div class="grid gap-4">
+		<p>
+			<a class="font-bold" href="/{notification.from.displayName}">
 				{notification.from.name}
 				<span class="text-side">
 					(@{notification.from.displayName})
@@ -31,12 +31,15 @@
 			</a>
 			{#if notification.kind === 'Favourite'}
 				liked your
-				<a href="/post/{notification.post?.id}"> Post </a>.
+				<a class="font-bold" href="/post/{notification.post?.id}"> Post </a>.
 			{:else if notification.kind === 'Follow'}
 				started following you.
-			{:else}
+			{:else if notification.kind === 'Repost'}
 				reposted your
-				<a href="/post/{notification.post?.id}"> Post </a>.
+				<a class="font-bold" href="/post/{notification.post?.id}"> Post </a>.
+			{:else if notification.kind === 'Quote'}
+				quoted your
+				<a class="font-bold" href="/post/{notification.post?.id}"> Post </a>.
 			{/if}
 		</p>
 		<GUIDateTime createdAt={notification.createdAt} />
