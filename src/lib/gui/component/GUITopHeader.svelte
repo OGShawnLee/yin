@@ -3,7 +3,6 @@
 	export let href = '';
 	export let subtitle = '';
 	export let subhref = '';
-	export let variant: 'Normal' | 'Search' = 'Normal';
 
 	function handleLongTitle(title: string) {
 		if (title.length > 12) {
