@@ -1,0 +1,12 @@
+import { defineConfig } from 'vitest/config';
+import tsconfigPaths from 'vite-tsconfig-paths';
+
+export default defineConfig({
+  plugins: [tsconfigPaths()],
+  test: {
+    environment: 'node',
+    include: ['src/**/*.{test,spec}.{js,ts}'],
+    exclude: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+    setupFiles: ['src/test/setup.ts']
+  }
+});
