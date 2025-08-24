@@ -3,8 +3,8 @@
 	import SearchSchema, { type SearchSchemaShape } from '@business/schema/SearchSchema';
 	import GUIBottomMobileNavBar from '@gui/component/GUIBottomMobileNavBar.svelte';
 	import GUICardPost from '@gui/component/GUICardPost.svelte';
-	import GUIInput from '@gui/GUIInput.svelte';
-	import GUIProfileCard from '@gui/GUIProfileCard.svelte';
+	import GUIInput from '@gui/component/GUIInput.svelte';
+	import GUIProfileCard from '@gui/component/GUIProfileCard.svelte';
 	import GUITopHeader from '@gui/component/GUITopHeader.svelte';
 	import GUIMobileMenu from '@gui/layout/GUIMobileMenu.svelte';
 	import { superForm, type SuperValidated } from 'sveltekit-superforms';

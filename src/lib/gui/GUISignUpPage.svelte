@@ -3,8 +3,7 @@
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import AUTH_IMAGE from '@gui/images/AUTH-IMAGE.jpg';
 	import GUIFormModal from '@gui/GUIFormModal.svelte';
-	import GUIInput from '@gui/GUIInput.svelte';
-	import GUILogo from '@gui/component/GUILogo.svelte';
+	import GUIInput from '@gui/component/GUIInput.svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 

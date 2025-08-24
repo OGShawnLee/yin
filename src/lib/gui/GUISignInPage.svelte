@@ -2,8 +2,8 @@
 	import Schema, { type SignInShape } from '@business/schema/AuthSchema';
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import AUTH_IMAGE from '@gui/images/AUTH-IMAGE.jpg';
-	import GUIInput from './GUIInput.svelte';
-	import GUIFormModal from './GUIFormModal.svelte';
+	import GUIInput from '@gui/component/GUIInput.svelte';
+	import GUIFormModal from '@gui/GUIFormModal.svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 

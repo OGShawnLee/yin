@@ -1,8 +1,8 @@
 <script lang="ts">
 	import UserSchema, { type UpdateUserShape, type UserShape } from '@business/schema/UserSchema';
 	import type { SuperValidated } from 'sveltekit-superforms';
-	import GUIInput from './GUIInput.svelte';
-	import GUIFormModal from './GUIFormModal.svelte';
+	import GUIInput from '@gui/component/GUIInput.svelte';
+	import GUIFormModal from '@gui/GUIFormModal.svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 

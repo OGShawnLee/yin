@@ -1,6 +1,6 @@
 <script lang="ts">
-	import GUIAppLayout from '@gui/GUIAppLayout.svelte';
-	import { CurrentUserState } from '@gui/State.js';
+	import GUIAppLayout from '@gui/layout/GUIAppLayout.svelte';
+	import { CurrentUserState } from '@gui/State';
 
 	export let data;
 

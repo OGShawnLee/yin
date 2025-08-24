@@ -1,6 +1,6 @@
 <script lang="ts">
-	import GUIFollowLayout from '@gui/GUIFollowLayout.svelte';
-	import GUIProfileCard from '@gui/GUIProfileCard.svelte';
+	import GUIFollowLayout from '@gui/layout/GUIFollowLayout.svelte';
+	import GUIProfileCard from '@gui/component/GUIProfileCard.svelte';
 
 	export let data;
 </script>

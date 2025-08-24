@@ -6,7 +6,7 @@
 	import type { CurrentUserShape } from '@business/schema/AuthSchema';
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import GUICardQuoteOf from '@gui/component/GUICardQuoteOf.svelte';
-	import GUIInput from '@gui/GUIInput.svelte';
+	import GUIInput from '@gui/component/GUIInput.svelte';
 	import GUITopHeader from '@gui/component/GUITopHeader.svelte';
 	import GUIUserHeader from '@gui/component/GUIUserHeader.svelte';
 	import { superForm } from 'sveltekit-superforms';
