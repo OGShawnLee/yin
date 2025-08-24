@@ -3,6 +3,7 @@
 	import type { ShallowPostShape } from '@business/schema/PostSchema';
 	import GUIBottomMobileNavBar from '@gui/component/GUIBottomMobileNavBar.svelte';
 	import GUICardDraft from '@gui/component/GUICardDraft.svelte';
+	import GUIMobileMenu from '@gui/layout/GUIMobileMenu.svelte';
 	import GUITopHeader from '@gui/component/GUITopHeader.svelte';
 
   interface DraftShape {
@@ -22,7 +23,9 @@
 </svelte:head>
 
 <main class="py-20">
-		<GUITopHeader title="Drafts" href="/compose/drafts" subtitle="Compose" subhref="/post/compose?state=CREATE" />
+		<GUITopHeader title="Drafts" href="/compose/drafts" subtitle="Compose" subhref="/post/compose?state=CREATE">
+			<GUIMobileMenu slot="button" />
+		</GUITopHeader>
 	<section>
 		<h2 class="sr-only">Recent Drafts</h2>
 		<ul>
