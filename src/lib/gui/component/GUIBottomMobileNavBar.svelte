@@ -30,7 +30,7 @@
 			Profile
 		</a>
 		<a
-			class="size-14 min-w-14 flex items-center justify-center bg-main rounded-full text-white"
+			class="size-12 min-w-12 flex items-center justify-center bg-main rounded-full text-white"
 			href="/post/compose?state=CREATE"
 			aria-label="Create Post"
 		>
@@ -44,7 +44,7 @@
 			aria-label="Notifications"
 		>
 			<Bell size={28} weight={route === 'Notifications' ? 'fill' : 'regular'} />
-			Record
+			Notifications
 		</a>
 	{:else}
 		<a class="mobile-link-button" href="/auth/sign-in" aria-label="Sign In">
@@ -60,6 +60,6 @@
 
 <style>
 	.mobile-link-button {
-		--uno: 'min-w-12 h-12 flex flex-col items-center text-xs';
+		--uno: 'min-w-12 h-12 flex flex-col items-center text-10px';
 	}
 </style>
