@@ -31,7 +31,7 @@ export default defineConfig({
     "#text-common": "text-common-light dark:text-common",
     "#text-inactive": "text-inactive-light dark:text-inactive",
     "#bg-summit--inverted": "bg-black dark:bg-white",
-    "#bg-input": "bg-input-light dark:text-input",
+    "#bg-input": "bg-input-light dark:bg-input",
     "#text-summit--inverted": "text-white dark:text-black",
     "#bordered": "border border-inactive-light dark:border-inactive",
     // Utility
