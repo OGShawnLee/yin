@@ -28,7 +28,7 @@
 				<input class="input" type="text" {...props} required bind:value={$input.displayName} />
 			{/snippet}
 		</GUIInput>
-		<GUIInput {form} name="password" label="Contraseña" placeholder="What is your Password?">
+		<GUIInput {form} name="password" label="Password" placeholder="What is your Password?">
 			{#snippet field(props)}
 				<input class="input" type="password" {...props} required bind:value={$input.password} />
 			{/snippet}
