@@ -15,11 +15,11 @@
 	import { ComposeState } from '@business/schema/ComposeSchema';
 
 	export let data: {
-		form: SuperValidated<InsertPostShape>,
-		currentUser: CurrentUserShape,
-		quoteOf: ShallowPostShape | null,
-		state: ComposeState
-	}
+		form: SuperValidated<InsertPostShape>;
+		currentUser: CurrentUserShape;
+		quoteOf: ShallowPostShape | null;
+		state: ComposeState;
+	};
 
 	const form = superForm(data.form, {
 		validators: valibotClient(
@@ -51,7 +51,7 @@
 				<p class="sr-only">Publish Post</p>
 			</button>
 		</GUITopHeader>
-		<section class="py-4 px-8 grid gap-4 border-b-2 border-inactive">
+		<section class="py-4 px-8 grid gap-4 bordered-b">
 			<GUIUserHeader user={data.currentUser} link={false} />
 			<GUICardQuoteOf quoteOf={data.quoteOf} link={false} />
 			<GUIInput

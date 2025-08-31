@@ -1,4 +1,5 @@
 <script lang="ts">
+	import GUIToggleThemeButton from "@gui/layout/GUIToggleThemeButton.svelte";
 	import { CurrentUserState } from '@gui/State';
 	import { Bell, House, MagnifyingGlass, Pen, SignIn, UserCircle } from 'phosphor-svelte';
 
@@ -8,21 +9,16 @@
 </script>
 
 <nav
-	class="fixed bottom-0 inset-x-0 h-20 px-8 flex md:hidden items-center justify-between bg-black/70 backdrop-filter backdrop-blur-sm border-t border-inactive text-side"
+	class="fixed bottom-0 inset-x-0 h-20 px-8 flex md:hidden items-center justify-between bg-white/70 dark:bg-black/70 backdrop-filter backdrop-blur-sm bordered-t text-side"
 >
-	<a
-		class="mobile-link-button"
-		class:text-white={route === 'Search'}
-		href="/search"
-		aria-label="Search"
-	>
+	<a class="mobile-link-button" data-active={route === 'Search'} href="/search" aria-label="Search">
 		<MagnifyingGlass size={28} weight={route === 'Search' ? 'fill' : 'regular'} />
 		Search
 	</a>
 	{#if $currentUser}
 		<a
 			class="mobile-link-button"
-			class:text-white={route === 'Profile'}
+			data-active={route === 'Profile'}
 			href="/{$currentUser.displayName}"
 			aria-label="Profile"
 		>
@@ -39,7 +35,7 @@
 		</a>
 		<a
 			class="mobile-link-button"
-			class:text-white={route === 'Notifications'}
+			data-active={route === 'Notifications'}
 			href="/notifications"
 			aria-label="Notifications"
 		>
@@ -47,19 +43,14 @@
 			Notifications
 		</a>
 	{:else}
+		<GUIToggleThemeButton variant="mobile-bottom" />
 		<a class="mobile-link-button" href="/auth/sign-in" aria-label="Sign In">
 			<SignIn size={28} />
 			Sign In
 		</a>
 	{/if}
-	<a class="mobile-link-button" class:text-white={route === 'Home'} href="/" aria-label="Home">
+	<a class="mobile-link-button" data-active={route === 'Home'} href="/" aria-label="Home">
 		<House size={28} weight={route === 'Home' ? 'fill' : 'regular'} />
 		Home
 	</a>
 </nav>
-
-<style>
-	.mobile-link-button {
-		--uno: 'min-w-12 h-12 flex flex-col items-center text-10px';
-	}
-</style>

@@ -15,12 +15,12 @@
 			<p>
 				Quoting
 				{#if link}
-					<a class="text-white font-bold" href="/{quoteOf.user.displayName}">
+					<a class="$text-summit font-bold" href="/{quoteOf.user.displayName}">
 						{quoteOf.user.name}
 						<span class="text-side">(@{quoteOf.user.displayName})</span>
 					</a>.
 				{:else}
-					<span class="text-white font-bold">
+					<span class="$text-summit font-bold">
 						{quoteOf.user.name}
 						<span class="text-side">(@{quoteOf.user.displayName})</span>.
 					</span>
@@ -30,7 +30,7 @@
 	</div>
 	{#if link}
 		<a href="/post/{quoteOf.id}">
-			<div class="px-8 py-6 grid gap-4 bg-input border border-inactive rounded-lg">
+			<div class="px-8 py-6 grid gap-4 bg-input-light dark:bg-input border border-inactive-light dark:border-inactive rounded-lg">
 				<GUIUserHeader user={quoteOf.user} link={false} />
 				{#if quoteOf.content}
 					<p class="leading-normal whitespace-pre-line">{quoteOf.content}</p>
@@ -39,7 +39,7 @@
 			</div>
 		</a>
 	{:else}
-		<div class="px-8 py-6 grid gap-4 bg-input border border-inactive rounded-lg">
+		<div class="px-8 py-6 grid gap-4 bg-input-light dark:bg-input border border-inactive-light dark:border-inactive rounded-lg">
 			<GUIUserHeader user={quoteOf.user} link={false} />
 			{#if quoteOf.content}
 				<p class="leading-normal whitespace-pre-line">{quoteOf.content}</p>

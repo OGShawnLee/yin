@@ -29,7 +29,7 @@
 	<Field {form} {name}>
 		<Control>
 			{#snippet children({ props })}
-				<Label class="text-white font-medium {hiddenLabel ? 'sr-only' : 'inline'}">{label}</Label>
+				<Label class="#text-summit font-medium {hiddenLabel ? 'sr-only' : 'inline'}">{label}</Label>
 				{@render field({ ...props, placeholder })}
 			{/snippet}
 		</Control>

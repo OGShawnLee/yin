@@ -15,7 +15,7 @@
 </script>
 
 <main
-	class="min-h-screen py-8 px-8 flex flex-col items-center justify-center bg-black/80 sm:backdrop-filter-none backdrop-filter backdrop-blur-sm"
+	class="min-h-screen py-8 px-8 flex flex-col items-center justify-center bg-white dark:bg-black/80 sm:backdrop-filter-none backdrop-filter backdrop-blur-sm"
 >
 	<div class="max-w-xl w-full mx-auto grid gap-4">
 		{#if logo}
@@ -24,19 +24,15 @@
 			</div>
 		{/if}
 		<form
-			class="max-w-xl w-full mx-auto mx-8 flex flex-col gap-8 border rounded-2xl border-inactive"
+			class="max-w-xl w-full mx-auto mx-8 flex flex-col gap-8 border border-inactive-light dark:border-inactive rounded-xl"
 			method="POST"
 			use:enhance
 		>
-			<header class="h-20 px-8 flex items-center justify-between border-b-2 border-neutral-900">
-				<h1 class="text-2xl text-white font-semibold tracking-tight">{title}</h1>
-				<a
-					class="size-10 min-w-10 flex items-center justify-center bg-input border rounded-lg border-inactive outline-none focus:(ring ring-white)"
-					href="/"
-					aria-label="Close"
-				>
-					<X class="text-white" size={24} />
-					<p class="sr-only">Close</p>
+			<header class="h-20 px-8 flex items-center justify-between bordered-b">
+				<h1 class="text-2xl #text-summit font-semibold tracking-tight">{title}</h1>
+				<a class="button-square-input" href="/" aria-label="Return to Home">
+					<X size={24} />
+					<p class="sr-only">Return to Home</p>
 				</a>
 			</header>
 			<div class="pb-8 px-8 grid gap-4">

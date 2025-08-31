@@ -15,20 +15,14 @@
 	<GUITopHeader href="/{data.profile.displayName}" title={data.profile.name}>
 		<GUIMobileMenu slot="button" />
 	</GUITopHeader>
-	<section class="p-8 grid gap-4 border-b border-inactive">
+	<section class="p-8 grid gap-4 bordered-b">
 		<div class="flex items-center justify-between">
 			<GUIUserHeader user={data.profile} badge={false} />
 			{#if data.currentUser && data.currentUser.displayName === data.profile.displayName}
-				<a
-					class="h-10 px-8 flex items-center justify-center bg-white rounded-full text-black font-bold hover:cursor-pointer"
-					href="/settings/profile">Edit Profile</a
-				>
+				<a class="button-black-white-rounded" href="/settings/profile">Edit Profile</a>
 			{:else if data.currentUser}
 				<form action="/{data.profile.displayName}?/handle-follow" method="post" use:enhance>
-					<button
-						type="submit"
-						class="h-10 px-8 flex items-center justify-center bg-white rounded-full text-black font-bold hover:cursor-pointer"
-					>
+					<button type="submit" class="button-black-white-rounded">
 						{data.profile.isFollowing ? 'Following' : 'Follow'}
 					</button>
 				</form>
@@ -55,7 +49,7 @@
 						class="text-xs text-side underline underline-offset-4"
 						href="/{data.profile.displayName}/followers"
 					>
-						<span class="text-white font-black">
+						<span class="#text-summit font-black">
 							{data.profile.followerCount}
 						</span>
 						{data.profile.followerCount === 1 ? 'Follower' : 'Followers'}
@@ -66,7 +60,7 @@
 						class="text-xs text-side underline underline-offset-4"
 						href="/{data.profile.displayName}/following"
 					>
-						<span class="text-white font-black">
+						<span class="#text-summit font-black">
 							{data.profile.followingCount}
 						</span>
 						Following

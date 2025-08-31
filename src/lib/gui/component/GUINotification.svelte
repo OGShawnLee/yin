@@ -13,11 +13,11 @@
 	};
 </script>
 
-<div class="p-8 flex items-start gap-2 border-b border-inactive text-white">
+<div class="p-8 flex items-start gap-2 bordered-b">
 	<div class="size-10 min-w-10 flex items-center justify-center">
 		<svelte:component
 			this={NOTIFICATION_KIND_ICONS[notification.kind]}
-			class="text-white"
+			class="#text-summit"
 			size={28}
 		/>
 	</div>
@@ -25,7 +25,7 @@
 		<p>
 			<a class="font-bold" href="/{notification.from.displayName}">
 				{notification.from.name}
-				<span class="text-side">
+				<span class="text-side-light dark:text-side">
 					(@{notification.from.displayName})
 				</span>
 			</a>

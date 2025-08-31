@@ -1,11 +1,13 @@
 <script lang="ts">
 	import GUIBadge from '@gui/component/GUIBadge.svelte';
+	import GUIToggleThemeButton from "@gui/layout/GUIToggleThemeButton.svelte";
 	import { Bell, Bookmarks, MagnifyingGlass, House, Pen, User } from 'phosphor-svelte';
 	import { CurrentUserState } from '@gui/State';
 	import { SignOut } from 'phosphor-svelte';
 	import { enhance } from '$app/forms';
-	import { fade, fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import { circIn } from 'svelte/easing';
+	import { toggleMode } from 'mode-watcher';
 
 	export let path: string;
 
@@ -22,53 +24,54 @@
 <div class="relative min-h-screen max-w-6xl w-full mx-auto | flex gap-8">
 	<nav class="hidden sticky h-full top-80px w-300px | xl:flex flex-col justify-between">
 		<div class="flex flex-col items-start gap-8">
-			<a class="flex items-center gap-4 hover:text-white" href="/">
+			<a class="flex items-center gap-4 hover:#text-summit" href="/">
 				<House size={24} />
 				Home
 			</a>
-			<a class="flex items-center gap-4 hover:text-white" href="/search">
+			<a class="flex items-center gap-4 hover:#text-summit" href="/search">
 				<MagnifyingGlass size={24} />
 				Search
 			</a>
 			{#if $currentUser}
 				<a
-					class="flex items-center gap-4 hover:text-white"
+					class="flex items-center gap-4 hover:#text-summit"
 					href="/{$currentUser.displayName}"
 				>
 					<User size={24} />
 					Profile
 				</a>
-				<a class="flex items-center gap-4 hover:text-white" href="/notifications">
+				<a class="flex items-center gap-4 hover:#text-summit" href="/notifications">
 					<Bell size={24} />
 					Notifications
 				</a>
-				<a class="flex items-center gap-4 hover:text-white" href="/bookmarks">
+				<a class="flex items-center gap-4 hover:#text-summit" href="/bookmarks">
 					<Bookmarks size={24} />
 					Bookmarks
 				</a>
-				<a class="flex items-center gap-4 hover:text-white" href="/post/compose?state=CREATE">
+				<a class="flex items-center gap-4 hover:#text-summit" href="/post/compose?state=CREATE">
 					<Pen size={24} />
 					Create Post
 				</a>
 			{/if}
+			<GUIToggleThemeButton variant="desktop/tablet" />
 		</div>
 		<section class="grid gap-4">
 			{#if $currentUser}
 				<h2 class="hidden">User Status</h2>
 				<div class="flex gap-4 items-center">
 					<div
-						class="size-12 flex items-center justify-center bg-gradient-to-l from-teal-400 to-cyan-600 bg-main rounded-lg font-bold text-lg"
+						class="size-12 flex items-center justify-center bg-gradient-to-l from-teal-400 to-cyan-600 bg-main rounded-lg font-bold text-lg text-white"
 					>
 						{getNameInitials($currentUser.name)}
 					</div>
 					<div>
 						<div class="flex items-center gap-2">
-							<p class="text-lg text-white font-medium">{$currentUser.name}</p>
+							<p class="text-lg #text-summit font-medium">{$currentUser.name}</p>
 							{#if $currentUser.isPro}
 								<GUIBadge kind="Pro" small />
 							{/if}
 						</div>
-						<p class="text-neutral-400">@{$currentUser.displayName}</p>
+						<p class="#text-side">@{$currentUser.displayName}</p>
 					</div>
 				</div>
 				<form action="/auth/sign-out" method="post" use:enhance>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PostShape } from '@business/schema/PostSchema';
 	import GUICardQuoteOf from '@gui/component/GUICardQuoteOf.svelte';
-	import GUIDialogManagePost from "@gui/component/GUIDialogManagePost.svelte"
+	import GUIDialogManagePost from '@gui/component/GUIDialogManagePost.svelte';
 	import GUIDateTime from '@gui/component/GUIDateTime.svelte';
 	import GUIUserHeader from '@gui/component/GUIUserHeader.svelte';
 	import GUICardPostButtonList from '@gui/component/GUICardPostButtonList.svelte';
@@ -15,7 +15,7 @@
 		<span class="flex items-center gap-2 text-xs">
 			<Recycle class="text-current" size={16} weight="fill" />
 			<p>
-				<a class="text-white font-bold" href="/{post.user.displayName}">
+				<a class="#text-summit font-bold" href="/{post.user.displayName}">
 					{post.user.name}
 					<span class="text-side">(@{post.user.displayName})</span>
 				</a>
@@ -24,7 +24,7 @@
 		</span>
 	</svelte:self>
 {:else}
-	<div class="grid gap-4 p-8 border-b border-inactive">
+	<div class="grid gap-4 p-8 bordered-b">
 		<slot />
 		<div class="flex items-center justify-between">
 			<GUIUserHeader user={post.user} />

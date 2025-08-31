@@ -42,7 +42,7 @@
 					<Package class="text-main" size={36} />
 				</div>
 				<span class="flex flex-col gap-2 text-left">
-					<span class="font-bold text-white"> Archive </span>
+					<span class="font-bold #text-summit"> Archive </span>
 					<span class="font-medium text-xs text-side">
 						Your post will only be visible to you. It can be restored.
 					</span>
@@ -51,14 +51,19 @@
 			{#if post.hasEditAvailable}
 				<a class="flex gap-2" href="/post/{post.id}/compose?state=EDIT_POST">
 					<div class="size-10 min-w-10 flex items-center justify-center">
-						<PencilLine class={post.user.isPro ? 'text-pro' : 'text-main'} size={36} />
+						<PencilLine
+							class={post.user.isPro ? 'text-pro-light dark:text-pro' : 'text-main'}
+							size={36}
+						/>
 					</div>
 					<span class="flex flex-col gap-2 text-left">
-						<span class="font-bold text-white"> Edit </span>
+						<span class="font-bold #text-summit"> Edit </span>
 						<span class="font-medium text-xs text-side">
 							{#if post.user.isPro}
-								You can edit this post up to <span class="text-pro font-black">5</span> times ({5 -
-									post.editCount} left), within 3 days of creation ({getEditLeftTime(
+								You can edit this post up to <span class="text-pro-light dark:text-pro font-black"
+									>5</span
+								>
+								times ({5 - post.editCount} left), within 3 days of creation ({getEditLeftTime(
 									post.createdAt
 								)} hours left).
 							{:else}
@@ -75,7 +80,7 @@
 					<Sparkle class="text-main" size={36} />
 				</div>
 				<span class="flex flex-col gap-2 text-left">
-					<span class="font-bold text-white"> Highlight </span>
+					<span class="font-bold #text-summit"> Highlight </span>
 					<span class="font-medium text-xs text-side">
 						Your post will appear in your Highlights section in your profile page. Show what you are
 						proud of.
@@ -87,7 +92,7 @@
 					<PushPin class="text-main" size={36} />
 				</div>
 				<span class="flex flex-col gap-2 text-left">
-					<span class="font-bold text-white"> Pin </span>
+					<span class="font-bold #text-summit"> Pin </span>
 					<span class="font-medium text-xs text-side">
 						Your post will appear always at the top of your Posts section in your profile page.
 					</span>
@@ -98,7 +103,7 @@
 					<Eraser class="text-danger" size={36} />
 				</div>
 				<span class="flex flex-col gap-2 text-left">
-					<span class="font-bold text-white"> Delete </span>
+					<span class="font-bold #text-summit"> Delete </span>
 					<span class="font-medium text-xs text-side">
 						Your post will be deleted permanently. It can't be restored.
 					</span>
